@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'new',
     loadChildren: () => import('./pages/new-patient/new-patient.module').then(m => m.NewPatientModule)
+  },
+  {
+    path: 'scan-qr',
+    loadChildren: () => import('./pages/scan-qr/scan-qr.module').then(m => m.ScanQrPageModule)
   }
 ];
 

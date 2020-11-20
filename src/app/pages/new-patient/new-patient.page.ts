@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Patient } from '../../model/Patient';
 
 @Component({
   selector: 'app-new-patient',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewPatientPage implements OnInit {
 
+  public patient: Patient = new Patient();
 
   constructor() {
   }
@@ -14,4 +16,7 @@ export class NewPatientPage implements OnInit {
   ngOnInit() {
   }
 
+  public save(): void {
+    console.log(this.patient);
+  }
 }

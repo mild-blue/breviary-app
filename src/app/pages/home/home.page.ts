@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Patient } from '../../model/Patient';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,18 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
-  public folder: string;
+  public patients: Patient[];
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private apiService: ApiService) {
   }
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    this._initPatients();
   }
 
+  private _initPatients(): void {
+    this.apiService.getPatients().subscribe((patients) => {
+      this.patients = patients;
+    });
+  }
 }

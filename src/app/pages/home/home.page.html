@@ -22,7 +22,7 @@
   </ion-tabs>
 
   <ion-list *ngIf="patients.length">
-    <ion-item *ngFor="let p of patients" detail="true">
+    <ion-item *ngFor="let p of patients" [detail]="true">
       {{p.first_name + ' ' + p.last_name}}
     </ion-item>
   </ion-list>

@@ -17,9 +17,9 @@ export class ApiService {
     return this.http.get(
       `${environment.apiUrl}`
     ).pipe(
-      map((r: Patient[]) => {
+      map((r: Object) => {
         console.log(r);
-        return r;
+        return r as Patient[];
       })
     );
   }

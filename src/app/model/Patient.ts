@@ -21,7 +21,7 @@ export class Patient {
     this.sex = PatientSex.M;
     this.target_aptt = {
       from: 0,
-      to: 0
+      to: 2.5
     };
     this.actual_aptt = 0;
     this.actual_aptt_updated_on = new Date();

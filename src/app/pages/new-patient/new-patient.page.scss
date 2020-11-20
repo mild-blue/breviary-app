@@ -3,4 +3,14 @@ form {
   ion-button {
     margin: 40px 0 80px;
   }
+
+  ion-item {
+    position: relative;
+
+    &.ios ion-note {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
 }

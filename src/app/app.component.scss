@@ -19,11 +19,15 @@ ion-menu ion-list ion-list-header {
   }
 }
 
-ion-menu ion-item.selected {
-  --background: rgba(var(--ion-color-primary-contrast-rgb), 0.14);
+ion-menu ion-item {
+  --background: transparent;
+
+  &.selected {
+    --background: rgba(var(--ion-color-primary-contrast-rgb), 0.14);
+  }
 }
 
-ion-menu ion-item.selected ion-icon {
+ion-menu ion-item ion-icon {
   color: var(--ion-color-primary-contrast);
 }
 
@@ -32,12 +36,8 @@ ion-menu ion-item ion-label {
 }
 
 ion-menu ion-item ion-icon {
-  color: var(--ion-color-primary-contrast);
-}
-
-ion-menu ion-item ion-icon {
   font-size: 24px;
-  color: #73849a;
+  color: var(--ion-color-primary-contrast);
 }
 
 ion-menu ion-list#labels-list ion-list-header {

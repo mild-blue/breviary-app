@@ -1,5 +1,7 @@
 {
   "name": "breviary-app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../model/Patient';
 
+interface IntervalRange {
+  lower: number;
+  upper: number;
+}
+
 @Component({
   selector: 'app-new-patient',
   templateUrl: './new-patient.page.html',
@@ -18,5 +23,26 @@ export class NewPatientPage implements OnInit {
 
   public save(): void {
     console.log(this.patient);
+  }
+
+  public getPatientDate(): string {
+    const date = this.patient.date_of_birth;
+    return date.toISOString();
+  }
+
+  public setPatientDate(event: CustomEvent): void {
+    this.patient.date_of_birth = new Date(event.detail.value);
+  }
+
+  public getPatientRange(): IntervalRange {
+    return { lower: this.patient.target_aptt.from, upper: this.patient.target_aptt.to };
+  }
+
+  public setPatientRange(event: CustomEvent): void {
+    const range: IntervalRange = event.detail.value;
+    this.patient.target_aptt = {
+      from: +range.lower.toFixed(1),
+      to: +range.upper.toFixed(1)
+    };
   }
 }

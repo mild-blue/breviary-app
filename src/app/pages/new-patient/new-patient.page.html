@@ -3,6 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-buttons>
     <ion-title>New patient</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,13 +24,45 @@
         <ion-input [(ngModel)]="patient.last_name" name="last_name"></ion-input>
       </ion-item>
       <ion-item class="ion-no-padding">
+        <ion-label position="floating">Sex</ion-label>
+        <ion-select [(ngModel)]="patient.sex" name="sex">
+          <ion-select-option value="male">Male</ion-select-option>
+          <ion-select-option value="female">Female</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="floating">Date of birth</ion-label>
+        <ion-datetime [value]="getPatientDate()"
+                      (ionChange)="setPatientDate($event)"
+                      name="date_of_birth"
+                      displayFormat="DD.MM.YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item class="ion-no-padding">
         <ion-label position="floating">Height</ion-label>
-        <ion-input [(ngModel)]="patient.height" name="height"></ion-input>
+        <ion-input [(ngModel)]="patient.height" name="height" type="number"></ion-input>
+        <ion-note slot="end">cm</ion-note>
       </ion-item>
       <ion-item class="ion-no-padding">
         <ion-label position="floating">Weight</ion-label>
-        <ion-input [(ngModel)]="patient.weight" name="weight"></ion-input>
+        <ion-input [(ngModel)]="patient.weight" name="weight" type="number"></ion-input>
+        <ion-note slot="end">kg</ion-note>
       </ion-item>
+      <ion-item class="ion-no-padding" lines="none">
+        <ion-label slot="start">Target aPTT value</ion-label>
+        <ion-label slot="end" class="ion-text-right">{{ patient.target_aptt.from }}, {{patient.target_aptt.to}}</ion-label>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-range min="0" max="3" color="primary" step="0.1" dual-knobs
+                   [snaps]="true"
+                   [ticks]="true"
+                   [value]="getPatientRange()"
+                   (ionChange)="setPatientRange($event)"
+                   name="target_aptt">
+          <ion-label slot="start">0</ion-label>
+          <ion-label slot="end">3</ion-label>
+        </ion-range>
+      </ion-item>
+
       <ion-button type="submit" color="primary" expand="block" (click)="save()">Save</ion-button>
     </form>
   </main>

@@ -1,5 +1,6 @@
 // === BRAND COLORS === //
 $brand-red: #e2001a;
+$brand-red-rgb: 212, 47, 48;
 $brand-grey-dark: #dddddd;
 $brand-grey-darker: #666666;
 
@@ -20,6 +21,7 @@ $white: #ffffff;
 $light: #f9f9f9;
 $dark: $brand-grey-darker;
 $primary: $brand-red;
+$primary-rgb: $brand-red-rgb;
 $accent: #007bff;
 $success: #28a745;
 $danger: #dc3545;

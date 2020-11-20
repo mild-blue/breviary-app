@@ -26,6 +26,7 @@
           {{p.first_name + ' ' + p.last_name}}
         </ion-item>
       </ion-list>
+      <p *ngIf="!patients.length">Continue by adding new patient</p>
     </ng-container>
 
     <ng-container *ngSwitchCase="tabs.insulin">
@@ -35,8 +36,11 @@
           {{p.first_name + ' ' + p.last_name}}
         </ion-item>
       </ion-list>
+      <p *ngIf="!patients.length">Continue by adding new patient</p>
     </ng-container>
   </main>
 
-
+  <ion-fab-button color="primary">
+    <ion-icon name="add-outline"></ion-icon>
+  </ion-fab-button>
 </ion-content>

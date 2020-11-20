@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -7,8 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-list>
+<ion-content>
+  <ion-tabs>
+    <ion-tab-bar slot="top" color="primary">
+      <ion-tab-button tab="heparin">
+        <ion-label>Heparin</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
+
+      <ion-tab-button tab="insulin">
+        <ion-label>Insulin</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+  <ion-list *ngIf="patients.length">
     <ion-item *ngFor="let p of patients" detail="true">
       {{p.first_name + ' ' + p.last_name}}
     </ion-item>

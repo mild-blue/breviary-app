@@ -8,7 +8,7 @@ import { ApiService } from '../../services/api.service';
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
-  public patients: Patient[];
+  public patients: Patient[] = [];
 
   constructor(private apiService: ApiService) {
   }

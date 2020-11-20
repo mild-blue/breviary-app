@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
@@ -8,10 +8,27 @@
 </ion-header>
 
 <ion-content>
-
   <main>
+    <ion-button fill="outline" expand="block" routerLink="/scan-qr" routerDirection="forward">Scan QR code</ion-button>
 
+    <form (ngSubmit)="save()">
+      <ion-item class="ion-no-padding">
+        <ion-label position="floating">First name</ion-label>
+        <ion-input type="text" [(ngModel)]="patient.first_name" name="first_name"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="floating">Last name</ion-label>
+        <ion-input [(ngModel)]="patient.last_name" name="last_name"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="floating">Height</ion-label>
+        <ion-input [(ngModel)]="patient.height" name="height"></ion-input>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label position="floating">Weight</ion-label>
+        <ion-input [(ngModel)]="patient.weight" name="weight"></ion-input>
+      </ion-item>
+      <ion-button type="submit" color="primary" expand="block" (click)="save()">Save</ion-button>
+    </form>
   </main>
-
-
 </ion-content>

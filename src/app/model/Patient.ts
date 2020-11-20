@@ -6,7 +6,6 @@ export interface Patient {
   height: number;
   weight: number;
   sex: PatientSex;
-  enum;
   target_aptt: Interval;
   actual_aptt: number;
   actual_aptt_updated_on: Date;

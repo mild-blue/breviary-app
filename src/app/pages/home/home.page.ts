@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../model/Patient';
 import { ApiService } from '../../services/api.service';
+import { HomeTab } from './home.interface';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,9 @@ import { ApiService } from '../../services/api.service';
 })
 export class HomePage implements OnInit {
   public patients: Patient[] = [];
+
+  public activeTab: HomeTab = HomeTab.heparin;
+  public tabs: typeof HomeTab = HomeTab;
 
   constructor(private apiService: ApiService) {
   }

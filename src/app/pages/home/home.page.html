@@ -3,27 +3,40 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Seznam pacientů</ion-title>
+    <ion-title>Patient list</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-tabs>
-    <ion-tab-bar slot="top" color="primary">
-      <ion-tab-button tab="heparin">
-        <ion-label>Heparin</ion-label>
-        <ion-badge>6</ion-badge>
-      </ion-tab-button>
 
-      <ion-tab-button tab="insulin">
-        <ion-label>Insulin</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+  <ion-segment [(ngModel)]="activeTab">
+    <ion-segment-button [value]="tabs.heparin">
+      <ion-label>Heparin</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="tabs.insulin">
+      <ion-label>Insulin</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
-  <ion-list *ngIf="patients.length">
-    <ion-item *ngFor="let p of patients" [detail]="true">
-      {{p.first_name + ' ' + p.last_name}}
-    </ion-item>
-  </ion-list>
+  <main [ngSwitch]="activeTab">
+    <ng-container *ngSwitchCase="tabs.heparin">
+      <h1>Heparin patients</h1>
+      <ion-list *ngIf="patients.length">
+        <ion-item *ngFor="let p of patients" [detail]="true">
+          {{p.first_name + ' ' + p.last_name}}
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="tabs.insulin">
+      <h1>Insulin patients</h1>
+      <ion-list *ngIf="patients.length">
+        <ion-item *ngFor="let p of patients" [detail]="true">
+          {{p.first_name + ' ' + p.last_name}}
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </main>
+
+
 </ion-content>

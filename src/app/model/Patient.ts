@@ -40,8 +40,8 @@ export class Patient {
 }
 
 export enum PatientSex {
-  M = 'male',
-  F = 'female'
+  M = 'M',
+  F = 'F'
 }
 
 export enum DrugType {

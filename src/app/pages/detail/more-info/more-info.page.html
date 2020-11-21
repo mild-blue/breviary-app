@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>more-info</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Patient info</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <main>
+    <app-patient-form [patient]="patient" (formSubmitted)="save($event)"></app-patient-form>
+  </main>
 </ion-content>

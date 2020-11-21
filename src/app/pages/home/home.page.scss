@@ -44,6 +44,10 @@ ion-list {
   ion-item {
     --inner-padding-start: 16px;
     background: var(--ion-color-primary-contrast);
+
+    &:first-child {
+      --inner-border-width: 1px 0;
+    }
   }
 }
 

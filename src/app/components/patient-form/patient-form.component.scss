@@ -9,12 +9,24 @@
   overflow: hidden;
   box-shadow: 0 0 12px 6px rgba(0, 0, 0, 0.2);
 
-
   z-index: 10;
 
   left: 0;
 }
 
 section {
-  padding-bottom: 80px;
+  padding-bottom: 120px;
+}
+
+form {
+
+  ion-item {
+    position: relative;
+
+    &.ios ion-note {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+  }
 }

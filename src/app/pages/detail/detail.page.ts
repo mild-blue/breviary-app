@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 import { Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { NotificationService } from '@app/services/notification/notification.service';
-import { IonDatetime } from '@ionic/angular';
+import { AlertController, IonDatetime } from '@ionic/angular';
 
 interface TimeDiff {
   days: string
@@ -25,9 +25,11 @@ export class DetailPage implements OnInit {
   public historyEntries: PatientHistoryEntry[] = [];
   public timeLeft: string = '';
   public reminderOn?: boolean;
+  public isStopped: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService,
+              private alertController: AlertController,
               private notificationService: NotificationService) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
@@ -103,16 +105,6 @@ export class DetailPage implements OnInit {
     }
   }
 
-
-  public getPatientAge(): number {
-    if (!this.patient) {
-      return 0;
-    }
-    const ageDifMs = Date.now() - this.patient.date_of_birth.getTime();
-    const ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
   public toggleReminder(): void {
     this.reminderOn = !this.reminderOn;
 
@@ -123,5 +115,26 @@ export class DetailPage implements OnInit {
     } else {
       this.notificationService.disable();
     }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      message: `Are you sure you want to stop infusion pump for patient ${this.patient?.first_name} ${this.patient?.last_name}?`,
+      buttons: [
+        {
+          text: 'Stop patient infusion pump',
+          cssClass: 'danger',
+          handler: () => {
+            this.isStopped = true;
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+
+    await alert.present();
   }
 }

@@ -55,7 +55,7 @@
 
 
     <div class="btn-center">
-      <ion-button>Stop the pump</ion-button>
+      <ion-button (click)="presentAlert()" [disabled]="isStopped">Stop the pump</ion-button>
     </div>
 
   </main>

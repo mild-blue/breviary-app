@@ -1,0 +1,37 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Patient detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main *ngIf="patient">
+
+    <div class="box">
+      <h1>{{ patient.first_name }} {{ patient.last_name }}</h1>
+
+      <div class="patient-info">
+        <ul>
+          <li>
+            <div class="value">{{ getPatientAge() }}</div>
+            <div class="label">age</div>
+          </li>
+          <li>
+            <div class="value">{{ patient.weight }}</div>
+            <div class="label">weight</div>
+          </li>
+          <li>
+            <div class="value">{{ patient.target_aptt.low }} - {{patient.target_aptt.high}}</div>
+            <div class="label">target aptt</div>
+          </li>
+        </ul>
+      </div>
+
+      <ion-button expand="block" fill="outline">More patient information</ion-button>
+    </div>
+
+  </main>
+</ion-content>

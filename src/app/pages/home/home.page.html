@@ -21,22 +21,26 @@
   <main [ngSwitch]="activeTab">
     <ng-container *ngSwitchCase="tabs.heparin">
       <h1>Heparin patients</h1>
-      <ion-list *ngIf="patients.length">
-        <ion-item *ngFor="let p of patients" [detail]="true">
+      <ion-list *ngIf="hPatients.length">
+        <ion-item *ngFor="let p of hPatients"
+                  [detail]="true"
+                  [routerLink]="['/detail/', p.id]">
           {{p.first_name + ' ' + p.last_name}}
         </ion-item>
       </ion-list>
-      <p *ngIf="!patients.length">Continue by adding new patient</p>
+      <p *ngIf="!hPatients.length">Continue by adding new patient</p>
     </ng-container>
 
     <ng-container *ngSwitchCase="tabs.insulin">
       <h1>Insulin patients</h1>
-      <ion-list *ngIf="patients.length">
-        <ion-item *ngFor="let p of patients" [detail]="true">
+      <ion-list *ngIf="iPatients.length">
+        <ion-item *ngFor="let p of iPatients"
+                  [detail]="true"
+                  [routerLink]="['/detail/', p.id]">
           {{p.first_name + ' ' + p.last_name}}
         </ion-item>
       </ion-list>
-      <p *ngIf="!patients.length">Continue by adding new patient</p>
+      <p *ngIf="!iPatients.length">Continue by adding new patient</p>
     </ng-container>
   </main>
 

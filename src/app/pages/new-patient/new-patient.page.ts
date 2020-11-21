@@ -35,14 +35,14 @@ export class NewPatientPage implements OnInit {
   }
 
   public getPatientRange(): IntervalRange {
-    return { lower: this.patient.target_aptt.from, upper: this.patient.target_aptt.to };
+    return { lower: this.patient.target_aptt.low, upper: this.patient.target_aptt.high };
   }
 
   public setPatientRange(event: CustomEvent): void {
     const range: IntervalRange = event.detail.value;
     this.patient.target_aptt = {
-      from: +range.lower.toFixed(1),
-      to: +range.upper.toFixed(1)
+      low: +range.lower.toFixed(1),
+      high: +range.upper.toFixed(1)
     };
   }
 }

@@ -10,6 +10,7 @@ export class Patient {
   actual_aptt: number;
   actual_aptt_updated_on: Date;
   actual_dosage: number;
+  drug_type: DrugType;
 
   constructor() {
     this.id = '';
@@ -19,9 +20,10 @@ export class Patient {
     this.height = 0;
     this.weight = 0;
     this.sex = PatientSex.M;
+    this.drug_type = DrugType.H;
     this.target_aptt = {
-      from: 0,
-      to: 2.5
+      low: 0,
+      high: 2.5
     };
     this.actual_aptt = 0;
     this.actual_aptt_updated_on = new Date();
@@ -34,7 +36,12 @@ export enum PatientSex {
   F = 'female'
 }
 
+export enum DrugType {
+  H = 'HEPARIN',
+  I = 'INSULIN'
+}
+
 export interface Interval {
-  from: number;
-  to: number;
+  low: number;
+  high: number;
 }

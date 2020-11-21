@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "breviary-app",
+  "appId": "blue.mild.breviary.app",
+  "appName": "Virtual Breviary",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

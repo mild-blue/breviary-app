@@ -35,4 +35,17 @@ export class ApiService {
       })
     );
   }
+
+  public findPatientByQR(code: string): Observable<Patient> {
+    return this.http.get(
+      `${environment.apiUrl}/patients/${code}`
+    ).pipe(
+      map((r: Object) => {
+        const patient = r as Patient;
+
+        console.log(patient);
+        return patient;
+      })
+    );
+  }
 }

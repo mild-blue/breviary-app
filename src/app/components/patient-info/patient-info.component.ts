@@ -17,7 +17,7 @@ export class PatientInfoComponent implements OnInit {
   }
 
   public getPatientAge(): number {
-    if (!this.patient) {
+    if (!this.patient?.date_of_birth) {
       return 0;
     }
     const ageDifMs = Date.now() - this.patient.date_of_birth.getTime();

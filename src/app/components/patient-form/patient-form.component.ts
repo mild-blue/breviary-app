@@ -23,11 +23,13 @@ export class PatientFormComponent implements OnInit {
   }
 
   public save(): void {
+    // if(!this.patient || !this.patient.first_name || !this.patient.last_name || !this.patient.date_of_birth ||
+    // !this.patient.height || !this.patient.weight || !this.patient)
     this.formSubmitted.emit(this.patient);
   }
 
   public getPatientDate(): string {
-    if (!this.patient) {
+    if (!this.patient?.date_of_birth) {
       return '';
     }
     const date = this.patient.date_of_birth;
@@ -42,8 +44,8 @@ export class PatientFormComponent implements OnInit {
   }
 
   public getPatientRange(): IntervalRange | undefined {
-    if (!this.patient) {
-      return undefined;
+    if (!this.patient?.target_aptt) {
+      return { lower: 1.5, upper: 3 };
     }
     return { lower: this.patient.target_aptt.low, upper: this.patient.target_aptt.high };
   }

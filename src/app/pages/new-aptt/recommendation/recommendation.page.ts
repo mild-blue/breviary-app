@@ -50,10 +50,8 @@ export class RecommendationPage implements OnInit {
 
   public accept(): void {
     if (this.r?.next_remainder) {
-      console.log(this.r.next_remainder);
       const date = new Date(this.r.next_remainder);
       date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-      console.log('setting', date);
       this.nfService.setNextReminderDate(date);
     }
 

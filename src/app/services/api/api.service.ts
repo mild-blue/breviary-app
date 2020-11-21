@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HeparinRecommendation, Patient, PatientHistoryEntry } from '@app/model/Patient';
+import { DrugType, HeparinRecommendation, Patient, PatientHistoryEntry, PatientSex } from '@app/model/Patient';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -11,6 +11,16 @@ import { first, map } from 'rxjs/operators';
 export class ApiService {
 
   constructor(private http: HttpClient) {
+  }
+
+  private static _fixTimeZone(patient: Patient): Patient {
+    if (patient.date_of_birth) {
+      const date = new Date(patient.date_of_birth);
+      date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+      patient.date_of_birth = date;
+    }
+
+    return patient;
   }
 
   public getPatients(): Observable<Patient[]> {
@@ -29,12 +39,7 @@ export class ApiService {
       `${environment.apiUrl}/patients/${id}`
     ).pipe(
       map((r: Object) => {
-        const patient = r as Patient;
-        if (patient.date_of_birth) {
-          patient.date_of_birth = new Date(patient.date_of_birth);
-        }
-
-        return patient;
+        return ApiService._fixTimeZone(r as Patient);
       })
     );
   }
@@ -43,15 +48,46 @@ export class ApiService {
     return this.http.put(
       `${environment.apiUrl}/patients/${patient.id}`,
       {
-        drug_type: patient.drug_type,
+        first_name: patient.first_name ?? '',
+        last_name: patient.last_name ?? '',
+        date_of_birth: patient.date_of_birth?.toISOString() ?? new Date(),
+        height: patient.height ?? 0,
+        weight: patient.weight ?? 0,
+        drug_type: patient.drug_type?.valueOf() ?? DrugType.H,
+        sex: patient.sex?.valueOf() ?? PatientSex.M,
+        target_aptt_value: 0, // todo remove
         target_aptt_low: patient.target_aptt?.low ?? 0,
         target_aptt_high: patient.target_aptt?.high ?? 0,
-        tddi: patient.tddi,
-        target_glycemia: patient.target_glycemia
+        tddi: patient.tddi ?? 0,
+        target_glycemia: patient.target_glycemia ?? 0
       }
     ).pipe(
       map((r: Object) => {
-        return r as Patient;
+        return ApiService._fixTimeZone(r as Patient);
+      })
+    );
+  }
+
+  public addPatient(patient: Patient): Observable<Patient> {
+    return this.http.post(
+      `${environment.apiUrl}/patients/`,
+      {
+        first_name: patient.first_name ?? '',
+        last_name: patient.last_name ?? '',
+        date_of_birth: patient.date_of_birth?.toISOString() ?? new Date(),
+        height: patient.height ?? 0,
+        weight: patient.weight ?? 0,
+        target_aptt_value: 0, // todo remove
+        drug_type: patient.drug_type?.valueOf() ?? DrugType.H,
+        sex: patient.sex?.valueOf() ?? PatientSex.M,
+        target_aptt_low: patient.target_aptt?.low ?? 0,
+        target_aptt_high: patient.target_aptt?.high ?? 0,
+        tddi: patient.tddi ?? 0,
+        target_glycemia: patient.target_glycemia ?? 0
+      }
+    ).pipe(
+      map((r: Object) => {
+        return ApiService._fixTimeZone(r as Patient);
       })
     );
   }
@@ -76,15 +112,12 @@ export class ApiService {
     ).pipe(first()).toPromise();
   }
 
-  public findPatientByQR(code: string): Observable<Patient> {
+  public findPatientByQR(): Observable<Patient> {
     return this.http.get(
-      `${environment.apiUrl}/patients/${code}`
+      `${environment.apiUrl}/patients/qr-code`
     ).pipe(
       map((r: Object) => {
-        const patient = r as Patient;
-
-        console.log(patient);
-        return patient;
+        return ApiService._fixTimeZone(r as Patient);
       })
     );
   }

@@ -8,8 +8,10 @@ export class Patient {
   sex: PatientSex;
   target_aptt: Interval;
   actual_aptt: number;
+  previous_aptt: number;
   actual_aptt_updated_on: Date;
   actual_dosage: number;
+  previous_dosage: number;
   drug_type: DrugType;
   tddi: number;
   target_glycemia: number;
@@ -28,8 +30,10 @@ export class Patient {
       high: 2.5
     };
     this.actual_aptt = 0;
+    this.previous_aptt = 0;
     this.actual_aptt_updated_on = new Date();
     this.actual_dosage = 0;
+    this.previous_dosage = 0;
     this.tddi = 50;
     this.target_glycemia = 0;
   }

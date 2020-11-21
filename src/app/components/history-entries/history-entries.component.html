@@ -21,16 +21,16 @@
                     [value]="patient.actual_aptt_updated_on"></ion-datetime>
     </div>
     <div class="table-col">
-      {{patient.actual_aptt}}
+      {{patient.actual_aptt.toFixed(1)}}
     </div>
     <div class="table-col">
       -
     </div>
     <div class="table-col">
-      {{patient.actual_dosage}}
+      {{patient.actual_dosage.toFixed(1)}}
     </div>
   </div>
-  <div class="table-row" *ngFor="let e of historyEntries">
+  <div class="table-row" *ngFor="let e of entries">
     <div class="table-col">
       <ion-datetime display-format="DD.MM.YYYY hh:mm"
                     class="ion-no-padding"
@@ -44,7 +44,7 @@
       {{e.bolus}}
     </div>
     <div class="table-col">
-      {{e.heparin_continuous}}
+      {{e.heparin_continuous.toFixed(1)}}
     </div>
   </div>
 </div>

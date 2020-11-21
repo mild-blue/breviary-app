@@ -46,7 +46,7 @@ export class PatientFormComponent implements OnInit {
   }
 
   public getPatientRange(): IntervalRange | undefined {
-    if (!this.patient?.target_aptt) {
+    if (!this.patient?.target_aptt || !this.patient.target_aptt.low || !this.patient.target_aptt.high) {
       return { lower: 2, upper: 2.5 };
     }
     return { lower: this.patient.target_aptt.low, upper: this.patient.target_aptt.high };

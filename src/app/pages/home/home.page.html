@@ -30,6 +30,10 @@
         </ion-item>
       </ion-list>
       <p *ngIf="!hPatients.length">Continue by adding new patient</p>
+
+      <ion-fab-button color="primary" routerLink="/new/h" routerDirection="forward">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
     </ng-container>
 
     <ng-container *ngSwitchCase="tabs.insulin">
@@ -43,10 +47,10 @@
         </ion-item>
       </ion-list>
       <p *ngIf="!iPatients.length">Continue by adding new patient</p>
+
+      <ion-fab-button color="secondary" routerLink="/new/i" routerDirection="forward">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
     </ng-container>
   </main>
-
-  <ion-fab-button color="primary" routerLink="/new" routerDirection="forward">
-    <ion-icon name="add-outline"></ion-icon>
-  </ion-fab-button>
 </ion-content>

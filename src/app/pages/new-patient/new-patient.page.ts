@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient } from '../../model/Patient';
+import { DrugType, Patient } from '../../model/Patient';
 import { ApiService } from '../../services/api/api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -12,10 +12,14 @@ import { ToastController } from '@ionic/angular';
 export class NewPatientPage implements OnInit {
 
   public patient: Patient = new Patient();
+  public type: DrugType = DrugType.H;
 
-  constructor(private apiService: ApiService,
+  constructor(private activatedRoute: ActivatedRoute,
+              private apiService: ApiService,
               private toastController: ToastController,
               private router: Router) {
+    const type = this.activatedRoute.snapshot.paramMap.get('type');
+    this.type = type && type.toUpperCase() === DrugType.I.valueOf() ? DrugType.I : DrugType.H;
   }
 
   ngOnInit() {

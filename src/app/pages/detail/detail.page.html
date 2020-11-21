@@ -33,5 +33,44 @@
       <ion-button expand="block" fill="outline">More patient information</ion-button>
     </div>
 
+    <div class="aptt-header">
+      <h2>aPTT</h2>
+      <div class="alert">
+        <!-- todo: change true to isNotificationsActive -->
+        <ion-icon [name]="true ? 'notifications' : 'notifications-outline'"></ion-icon>
+        <span>3h 25min</span>
+      </div>
+    </div>
+
+    <ion-list>
+      <ion-item class="ion-no-padding" [detail]="true">
+        <ion-label>Current value</ion-label>
+        <ion-label slot="end">{{ patient.actual_aptt }}</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <div class="aptt-updated">
+      <div>Last update</div>
+      <ion-datetime display-format="DD.MM.YYYY HH:M"
+                    class="ion-no-padding"
+                    [value]="patient.actual_aptt_updated_on"></ion-datetime>
+    </div>
+
+    <div class="buttons">
+      <ion-button>Change aPTT value</ion-button>
+      <ion-button fill="clear">History</ion-button>
+    </div>
+
+    <h2>Pump speed</h2>
+    <ion-list>
+      <ion-item class="ion-no-padding">
+        <ion-label>{{ patient.drug_type | titlecase }}</ion-label>
+        <ion-label slot="end">{{ patient.actual_dosage }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="buttons">
+      <ion-button>Stop</ion-button>
+    </div>
+
   </main>
 </ion-content>

@@ -46,7 +46,7 @@ r.actual_heparin_continuous_dosage !== r.previous_heparin_continuous_dosage">
             <ion-card-content>
                 <div class="speed">
                     <div class="speed-item">
-                        <div class="value">{{r.previous_heparin_continuous_dosage.toFixed(1)}}</div>
+                        <div class="value">{{ r.previous_heparin_continuous_dosage >= 0 ? r.previous_heparin_continuous_dosage.toFixed(1) : '-'}}</div>
                         <div class="units">ml/hod</div>
                         <div class="label">Current</div>
                     </div>

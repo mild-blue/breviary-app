@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
-import { Patient } from '@app/model/Patient';
+import { Patient, PatientHistoryEntry } from '@app/model/Patient';
 
 @Component({
   selector: 'app-detail',
@@ -11,6 +11,7 @@ import { Patient } from '@app/model/Patient';
 export class DetailPage implements OnInit {
 
   public patient?: Patient;
+  public historyEntries: PatientHistoryEntry[] = [];
   public notificationTriggerTime: string = '';
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -34,7 +35,9 @@ export class DetailPage implements OnInit {
   }
 
   private _getPatientHistory(id: number): void {
-    this.apiService.getPatientHistory(id).subscribe();
+    this.apiService.getPatientHistory(id).subscribe((e => {
+      this.historyEntries = e;
+    }));
   }
 
   private _initTimeUpdate(): void {

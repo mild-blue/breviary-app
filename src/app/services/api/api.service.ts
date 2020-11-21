@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HeparinRecommendation, Patient } from '../../model/Patient';
+import { HeparinRecommendation, Patient, PatientHistoryEntry } from '../../model/Patient';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -36,14 +36,12 @@ export class ApiService {
     );
   }
 
-  public getPatientHistory(id: number): Observable<Patient> {
+  public getPatientHistory(id: number): Observable<PatientHistoryEntry[]> {
     return this.http.get(
       `${environment.apiUrl}/patients/history-entries/${id}`
     ).pipe(
       map((r: Object) => {
-        const patient = r as Patient;
-        console.log(r);
-        return patient;
+        return r as PatientHistoryEntry[];
       })
     );
   }

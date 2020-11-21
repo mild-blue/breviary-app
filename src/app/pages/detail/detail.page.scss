@@ -41,7 +41,7 @@ h1 {
     align-items: center;
     position: relative;
 
-    padding: 15px 30px;
+    padding: 15px 20px;
 
     &:not(:last-child)::after {
       content: '';
@@ -67,33 +67,15 @@ h1 {
   }
 }
 
-.aptt-header {
-  padding: 0 16px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 20px;
+ion-item-divider {
+  background: transparent;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  font-size: 14px;
 
-  h2 {
-    margin-bottom: 0;
-    padding: 0;
-  }
-
-  .alert {
-    color: var(--ion-color-primary);
-    font-weight: 700;
-
-    display: flex;
-    align-items: center;
-
-    ion-icon {
-      font-size: 22px;
-      margin-right: 10px;
-    }
-
-    ion-datetime {
-      font-size: 12px;
-    }
+  ion-icon {
+    font-size: 22px;
+    margin-right: 10px;
   }
 }
 
@@ -102,10 +84,6 @@ ion-list {
 
   &.md {
     padding: 0;
-  }
-
-  ion-item-divider {
-    background: transparent;
   }
 
   ion-item {
@@ -118,34 +96,23 @@ ion-list {
 
     ion-label:not(:first-child):last-child {
       text-align: right;
-      //font-weight: 700;
     }
   }
 }
 
-.aptt-updated {
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  font-size: 14px;
-  opacity: 0.6;
-}
-
-ion-datetime {
+ion-datetime, ion-label {
   opacity: 1 !important;
 }
 
 .buttons {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 40px;
-  margin-top: 15px;
+  margin: 15px 0;
 
   ion-button {
     flex: 1;
-    margin: 0 16px;
+    margin: 5px 0;
   }
 }
 
@@ -158,20 +125,46 @@ h2 {
 
   &-row {
     display: flex;
-    border-bottom: 1px solid var(--ion-color-primary-contrast);
+    background: var(--ion-color-primary-contrast);
+    border-bottom: 1px solid $body-bg;
+    opacity: 0.5;
 
     &.header {
       font-weight: 700;
+      background: transparent;
+    }
+
+    &.header, &:nth-child(2) {
+      opacity: 1;
     }
   }
 
   &-col {
-    padding: 5px 16px;
+    padding: 5px;
     text-align: center;
-    flex: 2;
+    flex: 1;
 
-    &:last-child, &:first-child {
-      flex: 3;
+    &:first-child {
+      padding-left: 16px;
+      flex-basis: 65px;
+      min-width: 65px;
     }
+
+    &:last-child {
+      padding-right: 16px;
+      flex-basis: 50px;
+      min-width: 50px;
+    }
+  }
+}
+
+.btn-center {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-top: 40px;
+
+  &.no-margin {
+    margin: 0;
   }
 }

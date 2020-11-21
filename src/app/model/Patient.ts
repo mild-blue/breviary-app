@@ -52,3 +52,10 @@ export interface HeparinRecommendation {
   next_remainder: Date;
   doctor_warning: string;
 }
+
+export interface PatientHistoryEntry {
+  date: Date;
+  aptt: number;
+  bolus: number;
+  heparin_continuous: number;
+}

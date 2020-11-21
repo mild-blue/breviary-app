@@ -9,7 +9,6 @@
 
 <ion-content>
   <main *ngIf="patient">
-
     <div class="box">
       <h1>{{ patient.first_name }} {{ patient.last_name }}</h1>
 
@@ -30,43 +29,9 @@
         </ul>
       </div>
 
-      <ion-button expand="block" fill="outline" [routerLink]="[]">More patient information</ion-button>
-    </div>
-
-    <div class="aptt-header">
-      <span>Notification</span>
-      <div class="alert">
-        <!-- todo: change true to isNotificationsActive -->
-        <ion-icon [name]="true ? 'notifications' : 'notifications-outline'"></ion-icon>
-        <ion-datetime display-format="hh:mm:ss"
-                      class="ion-no-padding"
-                      disabled
-                      [value]="notificationTriggerTime"></ion-datetime>
+      <div class="btn-center no-margin">
+        <ion-button size="small" fill="outline" [routerLink]="[]">More patient information</ion-button>
       </div>
-    </div>
-
-    <ion-list>
-      <ion-item class="ion-no-padding">
-        <ion-label><strong>aPTT</strong></ion-label>
-        <ion-label>{{ patient.actual_aptt }}</ion-label>
-      </ion-item>
-      <ion-item class="ion-no-padding">
-        <ion-label><strong>Pump speed</strong></ion-label>
-        <ion-label>{{ patient.actual_dosage }}</ion-label>
-      </ion-item>
-    </ion-list>
-
-    <div class="aptt-updated">
-      <div>Last update</div>
-      <ion-datetime display-format="DD.MM.YYYY hh:mm"
-                    class="ion-no-padding"
-                    disabled
-                    [value]="patient.actual_aptt_updated_on"></ion-datetime>
-    </div>
-
-    <div class="buttons">
-      <ion-button fill="outline" [routerLink]="['/new-aptt', patient.id]">Add new aPTT result</ion-button>
-      <ion-button>Stop pump</ion-button>
 
     </div>
 
@@ -96,23 +61,60 @@
           {{patient.actual_aptt}}
         </div>
         <div class="table-col">
-          1000
+          -
         </div>
         <div class="table-col">
           {{patient.actual_dosage}}
         </div>
       </div>
+      <div class="table-row" *ngFor="let e of historyEntries">
+        <div class="table-col">
+          <ion-datetime display-format="DD.MM.YYYY hh:mm"
+                        class="ion-no-padding"
+                        disabled
+                        [value]="e.date"></ion-datetime>
+        </div>
+        <div class="table-col">
+          {{e.aptt}}
+        </div>
+        <div class="table-col">
+          {{e.bolus}}
+        </div>
+        <div class="table-col">
+          {{e.heparin_continuous}}
+        </div>
+      </div>
     </div>
 
-    <!--    <h2>Pump speed</h2>-->
-    <!--    <ion-list>-->
-    <!--      <ion-item class="ion-no-padding">-->
-    <!--        <ion-label>{{ patient.drug_type | titlecase }}</ion-label>-->
-    <!--        <ion-label slot="end">{{ patient.actual_dosage }}</ion-label>-->
-    <!--      </ion-item>-->
-    <!--    </ion-list>-->
     <div class="buttons">
+      <ion-button expand="block" [routerLink]="['/new-aptt', patient.id]">Add new aPTT result</ion-button>
       <ion-button fill="clear" size="small">show complete history</ion-button>
+    </div>
+
+
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-icon name="notifications"></ion-icon>
+        Notification
+      </ion-item-divider>
+      <ion-list>
+        <ion-item class="ion-no-padding">
+          <ion-label>aPTT reminder</ion-label>
+          <ion-toggle></ion-toggle>
+        </ion-item>
+        <ion-item class="ion-no-padding">
+          <ion-label>Time left until next test</ion-label>
+          <ion-datetime display-format="hh:mm:ss"
+                        class="ion-no-padding"
+                        disabled
+                        slot="end"
+                        [value]="notificationTriggerTime"></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </ion-item-group>
+
+    <div class="btn-center">
+      <ion-button>Stop the pump</ion-button>
     </div>
 
   </main>

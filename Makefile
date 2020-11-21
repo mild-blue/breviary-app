@@ -21,6 +21,13 @@ run-android: build copy sync
 open-android:
 	ionic cap open android
 
+build-apk: build copy sync
+	cd android
+	./gradlew assembleDebug
+	cd ../
+	echo "The APK is in the following file: android/app/build/outputs/apk/debug/app-debug.apk"
+
+
 run:
 	npm install
 	ng serve

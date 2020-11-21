@@ -1,7 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" text="Home"></ion-back-button>
+      <ion-button routerLink="/home" routerDirection="back">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Home
+      </ion-button>
     </ion-buttons>
     <ion-title>Patient detail</ion-title>
   </ion-toolbar>
@@ -18,7 +21,6 @@
       <div class="btn-center no-margin">
         <ion-button size="small" fill="outline" [routerLink]="['more-info']">More patient information</ion-button>
       </div>
-
     </div>
 
     <app-history-entries [patient]="patient" [entries]="historyEntries"></app-history-entries>

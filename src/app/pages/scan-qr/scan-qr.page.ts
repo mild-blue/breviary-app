@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ApiService } from '@app/services/api/api.service';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,6 @@ export class ScanQrPage implements OnInit {
 
   constructor(private barcodeScanner: BarcodeScanner,
               private alertController: AlertController,
-              private toastController: ToastController,
               private router: Router,
               private apiService: ApiService) {
   }
@@ -28,9 +27,7 @@ export class ScanQrPage implements OnInit {
         if (this.qrContent) {
           this.apiService.findPatientByQR().subscribe(
             (p) => {
-              this.presentToast('Patient retrieved from IKEM database').then(() => {
-                this.router.navigate(['/detail/', p.id, '/more-info']);
-              });
+              this.presentSuccessAlert('Patient retrieved from IKEM database', p.id);
             },
             () => this.presentAlert('No patient found in database.'));
         }
@@ -40,16 +37,26 @@ export class ScanQrPage implements OnInit {
     });
   }
 
-  async presentToast(text: string): Promise<void> {
-    const toast = await this.toastController.create({
+  async presentSuccessAlert(text: string, id: number) {
+    const alert = await this.alertController.create({
       message: text,
-      duration: 2000,
-      position: 'top',
-      color: 'success',
-      cssClass: 'ion-text-center'
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/detail', id, 'more-info']);
+          }
+        },
+        {
+          text: 'Cancel',
+          handler: () => {
+            this.router.navigate(['/home']);
+          }
+        }
+      ]
     });
 
-    return toast.present();
+    await alert.present();
   }
 
   async presentAlert(text: string) {

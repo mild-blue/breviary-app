@@ -32,13 +32,13 @@ jobs:
           # push only if this is build in the master branch
           push: ${{ startsWith(github.ref, 'refs/heads/master') }}
 
-#      - name: Install SSH key
-#        uses: shimataro/ssh-key-action@v2
-#        with:
-#          key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-#
-#      - name: Redeploy application
-#        if: ${{ startsWith(github.ref, 'refs/heads/master') }}
-#        run: |
-#          ./devops/redeploy_staging.sh
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Redeploy application
+        if: ${{ startsWith(github.ref, 'refs/heads/master') }}
+        run: |
+          ssh "images@206.189.248.138" "cd /srv/breviary-app && ./redeploy.sh"

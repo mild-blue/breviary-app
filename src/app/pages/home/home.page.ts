@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient } from '../../model/Patient';
+import { DrugType, Patient } from '../../model/Patient';
 import { ApiService } from '../../services/api/api.service';
 import { HomeTab } from './home.interface';
 import { NotificationService } from '../../services/notification/notification.service';
@@ -10,7 +10,8 @@ import { NotificationService } from '../../services/notification/notification.se
   styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit {
-  public patients: Patient[] = [];
+  public hPatients: Patient[] = [];
+  public iPatients: Patient[] = [];
 
   public activeTab: HomeTab = HomeTab.heparin;
   public tabs: typeof HomeTab = HomeTab;
@@ -26,7 +27,8 @@ export class HomePage implements OnInit {
 
   private _initPatients(): void {
     this.apiService.getPatients().subscribe((patients) => {
-      this.patients = patients;
+      this.hPatients = patients.filter(p => p.drug_type === DrugType.H);
+      this.iPatients = patients.filter(p => p.drug_type === DrugType.I);
     });
   }
 }

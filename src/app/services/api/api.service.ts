@@ -15,11 +15,23 @@ export class ApiService {
 
   public getPatients(): Observable<Patient[]> {
     return this.http.get(
-      `${environment.apiUrl}`
+      `${environment.apiUrl}/patients`
     ).pipe(
       map((r: Object) => {
         console.log(r);
         return r as Patient[];
+      })
+    );
+  }
+
+  public getPatient(id: number): Observable<Patient> {
+    return this.http.get(
+      `${environment.apiUrl}/patients/${id}`
+    ).pipe(
+      map((r: Object) => {
+        const patient = r as Patient;
+        patient.date_of_birth = new Date(patient.date_of_birth);
+        return patient;
       })
     );
   }

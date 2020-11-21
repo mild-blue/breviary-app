@@ -43,12 +43,8 @@ export class RecommendationPage implements OnInit {
     if (!this.r) {
       return true;
     }
-    return ((this.r.actual_heparin_bolus_dosage !== undefined &&
-      this.r.actual_heparin_bolus_dosage === this.r.previous_heparin_bolus_dosage) ||
-      !this.r.actual_heparin_bolus_dosage) &&
-      ((this.r.actual_heparin_continuous_dosage !== undefined &&
-        this.r.actual_heparin_continuous_dosage === this.r.previous_heparin_continuous_dosage) ||
-        !this.r.actual_heparin_continuous_dosage) &&
+    return ((this.r.actual_heparin_bolus_dosage !== undefined && this.r.actual_heparin_bolus_dosage === this.r.previous_heparin_bolus_dosage) || this.r.actual_heparin_bolus_dosage === undefined) &&
+      ((this.r.actual_heparin_continuous_dosage !== undefined && this.r.actual_heparin_continuous_dosage === this.r.previous_heparin_continuous_dosage) || this.r.actual_heparin_continuous_dosage === undefined) &&
       !this.r.doctor_warning;
   }
 

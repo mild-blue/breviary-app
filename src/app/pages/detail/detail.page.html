@@ -11,6 +11,7 @@
   <main *ngIf="patient">
     <div class="box">
       <h1>{{ patient.first_name }} {{ patient.last_name }}</h1>
+      <ion-note>ID: {{ patient.id }}</ion-note>
 
       <app-patient-info [patient]="patient"></app-patient-info>
 

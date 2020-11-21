@@ -1,4 +1,4 @@
-<div class="table" *ngIf="patient">
+<div class="table" *ngIf="patient && entries.length">
   <div class="table-row header">
     <div class="table-col">
       Date
@@ -30,4 +30,8 @@
       {{e.heparin_continuous.toFixed(1)}}
     </div>
   </div>
+</div>
+
+<div *ngIf="patient && !entries.length" class="ion-text-center">
+  <ion-note>No entries for patient yet.</ion-note>
 </div>

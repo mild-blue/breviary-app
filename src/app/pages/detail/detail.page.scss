@@ -6,6 +6,7 @@ main {
 
 h1 {
   font-size: 32px;
+  margin-bottom: 0;
 }
 
 .no-events {
@@ -17,6 +18,10 @@ h1 {
   background: var(--ion-color-primary-contrast);
   margin-bottom: 30px;
   text-align: center;
+
+  ion-note {
+    font-size: 10px;
+  }
 
   @media (prefers-color-scheme: dark) {
     background: rgba($white, .1);

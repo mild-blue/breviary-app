@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://breviary.mild.blue/v1'
+  apiUrl: 'https://breviary-be.mild.blue/v1'
 };
 
 /*

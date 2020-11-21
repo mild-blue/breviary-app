@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../../model/Patient';
+import { ApiService } from '../../services/api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-patient',
@@ -10,13 +12,17 @@ export class NewPatientPage implements OnInit {
 
   public patient: Patient = new Patient();
 
-  constructor() {
+  constructor(private apiService: ApiService,
+              private router: Router) {
   }
 
   ngOnInit() {
   }
 
   public save(patient: Patient): void {
-    console.log(patient);
+    this.apiService.savePatient(patient).subscribe(p => {
+      console.log('P from BE', p);
+      this.router.navigate(['/home']);
+    });
   }
 }

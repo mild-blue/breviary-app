@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HeparinRecommendation, Patient, PatientHistoryEntry } from '../../model/Patient';
+import { HeparinRecommendation, Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -30,8 +30,28 @@ export class ApiService {
     ).pipe(
       map((r: Object) => {
         const patient = r as Patient;
-        patient.date_of_birth = new Date(patient.date_of_birth);
+        if (patient.date_of_birth) {
+          patient.date_of_birth = new Date(patient.date_of_birth);
+        }
+
         return patient;
+      })
+    );
+  }
+
+  public savePatient(patient: Patient): Observable<Patient> {
+    return this.http.put(
+      `${environment.apiUrl}/patients/${patient.id}`,
+      {
+        drug_type: patient.drug_type,
+        target_aptt_low: patient.target_aptt?.low ?? 0,
+        target_aptt_high: patient.target_aptt?.high ?? 0,
+        tddi: patient.tddi,
+        target_glycemia: patient.target_glycemia
+      }
+    ).pipe(
+      map((r: Object) => {
+        return r as Patient;
       })
     );
   }

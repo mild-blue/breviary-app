@@ -11,12 +11,14 @@ export class Patient {
   actual_aptt_updated_on: Date;
   actual_dosage: number;
   drug_type: DrugType;
+  tddi: number;
+  target_glycemia: number;
 
   constructor() {
     this.id = 0;
     this.first_name = '';
     this.last_name = '';
-    this.date_of_birth = new Date("1950/01/01");
+    this.date_of_birth = new Date('1950/01/01');
     this.height = 175;
     this.weight = 85;
     this.sex = PatientSex.M;
@@ -28,6 +30,8 @@ export class Patient {
     this.actual_aptt = 0;
     this.actual_aptt_updated_on = new Date();
     this.actual_dosage = 0;
+    this.tddi = 50;
+    this.target_glycemia = 0;
   }
 }
 

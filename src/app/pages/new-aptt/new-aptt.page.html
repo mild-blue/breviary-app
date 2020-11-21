@@ -1,7 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="cancel()">Cancel</ion-button>
+    <ion-buttons slot="start" *ngIf="patient">
+      <ion-button [routerLink]="['/detail', patient.id]" routerDirection="back">
+        Cancel
+      </ion-button>
     </ion-buttons>
     <ion-title>New aPTT result</ion-title>
     <ion-buttons slot="end">

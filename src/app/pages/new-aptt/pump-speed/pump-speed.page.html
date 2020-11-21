@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>Pump speed</ion-title>
     <ion-buttons slot="end" *ngIf="patient">
-      <ion-button [routerLink]="['/new-aptt', patient.id, 'pump-speed']">
+      <ion-button [routerLink]="['/new-aptt', patient.id, 'reminder', reminder]">
         Reminder
         <ion-icon name="chevron-forward"></ion-icon>
       </ion-button>

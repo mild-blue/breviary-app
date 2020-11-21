@@ -27,3 +27,6 @@ run:
 
 docker-build:
 	docker build -t mildblue/breviary-app .
+
+docker-run:
+	docker run -p 8080:80 --rm mildblue/breviary-app

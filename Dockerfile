@@ -11,11 +11,9 @@ RUN npm install -g @angular/cli
 COPY . .
 RUN npm run build
 
-RUN yarn build
-
 FROM nginx:stable
 
-COPY ./www/ /var/www
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
-
-CMD ["nginx -g 'daemon off;'"]
+COPY --from=build /app/www/ /var/www
+COPY ./nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx"]

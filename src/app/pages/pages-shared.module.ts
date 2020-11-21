@@ -4,13 +4,15 @@ import { PatientCardComponent } from '../components/patient-card/patient-card.co
 import { IonicModule } from '@ionic/angular';
 import { PatientFormComponent } from '../components/patient-form/patient-form.component';
 import { FormsModule } from '@angular/forms';
+import { PatientInfoComponent } from '../components/patient-info/patient-info.component';
 
 // import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     PatientCardComponent,
-    PatientFormComponent
+    PatientFormComponent,
+    PatientInfoComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     IonicModule,
     PatientCardComponent,
-    PatientFormComponent
+    PatientFormComponent,
+    PatientInfoComponent
   ]
 })
 export class PagesSharedModule {

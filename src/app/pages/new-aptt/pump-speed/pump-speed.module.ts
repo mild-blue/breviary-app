@@ -4,20 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DetailPageRoutingModule } from './detail-routing.module';
+import { PumpSpeedPageRoutingModule } from './pump-speed-routing.module';
 
-import { DetailPage } from './detail.page';
-import { PagesSharedModule } from '../pages-shared.module';
+import { PumpSpeedPage } from './pump-speed.page';
+import { PagesSharedModule } from '../../pages-shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DetailPageRoutingModule,
+    PumpSpeedPageRoutingModule,
     PagesSharedModule
   ],
-  declarations: [DetailPage]
+  declarations: [PumpSpeedPage]
 })
-export class DetailPageModule {
+export class PumpSpeedPageModule {
 }

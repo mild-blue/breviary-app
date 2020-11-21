@@ -6,6 +6,26 @@ section {
   padding-bottom: 80px;
 }
 
+.warning {
+  background: var(--ion-color-warning);
+  color: var(--ion-color-warning-contrast);
+
+  ion-icon {
+    font-size: 24px;
+    margin-right: 5px;
+  }
+
+  ion-card-subtitle {
+    display: flex;
+    align-items: center;
+    color: var(--ion-color-warning-contrast);
+  }
+
+  ion-card-content {
+    font-weight: 500;
+  }
+}
+
 .floating-button {
   margin: 30px 16px 20px;
   width: calc(100% - 32px);

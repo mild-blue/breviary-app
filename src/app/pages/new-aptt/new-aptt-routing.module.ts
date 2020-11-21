@@ -11,6 +11,14 @@ const routes: Routes = [
   {
     path: 'recommendation',
     loadChildren: () => import('./recommendation/recommendation.module').then(m => m.RecommendationPageModule)
+  },
+  {
+    path: 'pump-speed/:speed/:reminder',
+    loadChildren: () => import('./pump-speed/pump-speed.module').then(m => m.PumpSpeedPageModule)
+  },
+  {
+    path: 'reminder/:reminder',
+    loadChildren: () => import('./reminder/reminder.module').then(m => m.ReminderPageModule)
   }
 ];
 

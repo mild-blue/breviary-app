@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button default-href="home" text="Bolus"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pump speed</ion-title>
+    <ion-buttons slot="end" *ngIf="patient">
+      <ion-button [routerLink]="['/new-aptt', patient.id, 'pump-speed']">
+        Reminder
+        <ion-icon name="chevron-forward"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section *ngIf="patient">
+    <app-patient-card [patient]="patient"></app-patient-card>
+
+    <ion-card *ngIf="speed !== undefined">
+      <ion-card-header>
+        <ion-card-subtitle>Change pump speed</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="speed">
+          <div class="speed-item">
+            <div class="value">{{patient.actual_dosage}}</div>
+            <div class="units">j/kg/hod</div>
+            <div class="label">Current</div>
+          </div>
+          <ion-icon name="arrow-forward"></ion-icon>
+          <div class="speed-item">
+            <div class="value">{{speed}}</div>
+            <div class="units">j/kg/hod</div>
+            <div class="label">Recommended</div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button [routerLink]="['/new-aptt', patient.id, 'reminder', reminder]"
+                color="primary"
+                expand="block"
+                class="floating-button">
+      Continue
+    </ion-button>
+  </section>
+</ion-content>

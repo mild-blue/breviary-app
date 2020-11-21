@@ -1,0 +1,62 @@
+.speed {
+  display: flex;
+  align-items: center;
+
+  ion-icon {
+    font-size: 20px;
+    opacity: 0.3;
+  }
+
+  &-item {
+    flex: 1;
+    text-align: center;
+
+    &:last-of-type {
+      .value {
+        opacity: 1;
+        color: var(--ion-color-success);
+      }
+
+      .label {
+        opacity: 1;
+        color: var(--ion-color-success);
+      }
+    }
+
+    .value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      //opacity: 0.4;
+    }
+
+    .units {
+      opacity: 0.4;
+      font-size: 10px;
+    }
+
+    .label {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+  }
+}
+
+.floating-button {
+  margin: 30px 16px 20px;
+  width: calc(100% - 32px);
+
+  position: fixed;
+  bottom: 0;
+
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 12px 6px rgba(0, 0, 0, 0.2);
+
+
+  z-index: 10;
+
+  left: 0;
+}

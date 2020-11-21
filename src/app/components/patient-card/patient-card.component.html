@@ -1,7 +1,10 @@
 <ion-card *ngIf="patient">
   <ion-card-header>
     <ion-card-subtitle>Patient</ion-card-subtitle>
-    <ion-card-title>{{ patient.first_name }} {{patient.last_name}}, {{getPatientAge()}}</ion-card-title>
+    <ion-card-title>{{ patient.first_name }} {{patient.last_name}}</ion-card-title>
     <ion-note>ID: {{patient.id}}</ion-note>
   </ion-card-header>
+  <ion-card-content>
+    <app-patient-info [patient]="patient"></app-patient-info>
+  </ion-card-content>
 </ion-card>

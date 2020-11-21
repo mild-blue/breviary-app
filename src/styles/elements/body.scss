@@ -21,4 +21,16 @@ ion-picker {
 
 ion-card {
   background: var(--ion-color-primary-contrast);
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba($white, .1);
+  }
+
+  &-content {
+    color: black;
+
+    @media (prefers-color-scheme: dark) {
+      color: #ffffff;
+    }
+  }
 }

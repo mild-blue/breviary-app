@@ -2,13 +2,11 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start" *ngIf="patient">
       <ion-button [routerLink]="['/detail', patient.id]" routerDirection="back">
-        Cancel
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Patient
       </ion-button>
     </ion-buttons>
     <ion-title>New aPTT result</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="save()" [disabled]="!apttValue">Add</ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

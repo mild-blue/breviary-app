@@ -129,6 +129,11 @@ h2 {
     border-bottom: 1px solid $body-bg;
     opacity: 0.5;
 
+    @media (prefers-color-scheme: dark) {
+      background: rgba($white, .1);
+      border-bottom-color: rgba($white, .3);
+    }
+
     &.header {
       font-weight: 700;
       background: transparent;

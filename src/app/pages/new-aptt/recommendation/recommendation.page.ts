@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HeparinRecommendation, Patient } from '@app/model/Patient';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '@app/services/notification/notification.service';
@@ -9,7 +9,7 @@ import { ApiService } from '@app/services/api/api.service';
   templateUrl: './recommendation.page.html',
   styleUrls: ['./recommendation.page.scss']
 })
-export class RecommendationPage implements OnInit {
+export class RecommendationPage implements OnInit, OnDestroy {
   public patient?: Patient;
   public r?: HeparinRecommendation;
 
@@ -20,6 +20,14 @@ export class RecommendationPage implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this._initPatient(+id);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.r?.next_remainder) {
+      const date = new Date(this.r.next_remainder);
+      date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+      this.nfService.setNextReminderDate(date);
     }
   }
 

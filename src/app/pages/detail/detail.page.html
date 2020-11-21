@@ -28,31 +28,25 @@
     </div>
 
     <ion-item-group>
-      <ion-item-divider *ngIf="reminderOn">
-        <ion-icon name="notifications"></ion-icon>
-        Notification is on
+      <ion-item-divider>
+        <ion-label>Next aPTT</ion-label>
+        <ion-label slot="end" class="timeout" *ngIf="timeLeft !== ''">{{ timeLeft }}</ion-label>
       </ion-item-divider>
-      <ion-item-divider *ngIf="!reminderOn">
-        <ion-icon name="notifications-off"></ion-icon>
-        Notification is off
-      </ion-item-divider>
-      <ion-list>
-        <ion-item>
-          <ion-label>Enable</ion-label>
-          <ion-toggle [checked]="reminderOn"
-                      (ionChange)="toggleReminder()"></ion-toggle>
-        </ion-item>
-        <ion-item class="ion-no-padding" [disabled]="!reminderOn">
-          <ion-label *ngIf="nextReminderDate !== undefined">Time left until next test</ion-label>
-          <ion-note>{{ nextReminderDate !== undefined ? timeLeft : '-' }}</ion-note>
-        </ion-item>
-      </ion-list>
     </ion-item-group>
-
-    <div class="ion-hide">
-      <ion-datetime displayFormat="DD MMMM hh:mm a" #datetime></ion-datetime>
-    </div>
-
+    <ion-list>
+      <ion-item class="ion-no-padding" [detail]="false" (click)="toggleReminder()">
+        <ion-label>Notification</ion-label>
+        <div class="no-events">
+          <ion-toggle [checked]="nextReminderDate !== undefined"></ion-toggle>
+        </div>
+      </ion-item>
+      <ion-item class="ion-no-padding" *ngIf="nextReminderDate !== undefined">
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="DD MMMM hh:mm a"
+                      (ionChange)="handleReminderDateChange($event)"
+                      [value]="nextReminderDate.toISOString()"></ion-datetime>
+      </ion-item>
+    </ion-list>
 
     <div class="btn-center">
       <ion-button (click)="presentAlert()" [disabled]="isStopped">Stop the pump</ion-button>

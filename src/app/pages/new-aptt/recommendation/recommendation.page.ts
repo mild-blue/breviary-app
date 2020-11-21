@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeparinRecommendation, Patient } from '@app/model/Patient';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '@app/services/notification/notification.service';
@@ -9,7 +9,7 @@ import { ApiService } from '@app/services/api/api.service';
   templateUrl: './recommendation.page.html',
   styleUrls: ['./recommendation.page.scss']
 })
-export class RecommendationPage implements OnInit, OnDestroy {
+export class RecommendationPage implements OnInit {
   public patient?: Patient;
   public r?: HeparinRecommendation;
 
@@ -23,17 +23,8 @@ export class RecommendationPage implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    if (this.r?.next_remainder) {
-      const date = new Date(this.r.next_remainder);
-      date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
-      this.nfService.setNextReminderDate(date);
-    }
-  }
-
   ngOnInit() {
-    this.activatedRoute.queryParamMap
-    .subscribe((params) => {
+    this.activatedRoute.queryParamMap.subscribe((params) => {
         const r = params.get('recommendation');
         if (r) {
           this.r = JSON.parse(r);
@@ -59,6 +50,22 @@ export class RecommendationPage implements OnInit, OnDestroy {
         this.r.actual_heparin_continuous_dosage === this.r.previous_heparin_continuous_dosage) ||
         !this.r.actual_heparin_continuous_dosage) &&
       !this.r.doctor_warning;
+  }
+
+  public accept(): void {
+    if (this.r?.next_remainder) {
+      console.log(this.r.next_remainder);
+      const date = new Date(this.r.next_remainder);
+      date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+      console.log('setting', date);
+      this.nfService.setNextReminderDate(date);
+    }
+
+    if (this.patient) {
+      this.router.navigate(['/detail', this.patient.id]);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 
 }

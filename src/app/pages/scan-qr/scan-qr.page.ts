@@ -27,7 +27,7 @@ export class ScanQrPage implements OnInit {
         if (this.qrContent) {
           this.apiService.findPatientByQR().subscribe(
             (p) => {
-              this.presentSuccessAlert('Patient retrieved from IKEM database', p.id);
+              this.presentSuccessAlert('Patient retrieved from IKEM database.', p.id);
             },
             () => this.presentAlert('No patient found in database.'));
         }
@@ -45,12 +45,6 @@ export class ScanQrPage implements OnInit {
           text: 'OK',
           handler: () => {
             this.router.navigate(['/detail', id, 'more-info']);
-          }
-        },
-        {
-          text: 'Cancel',
-          handler: () => {
-            this.router.navigate(['/home']);
           }
         }
       ]

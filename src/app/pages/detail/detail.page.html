@@ -20,56 +20,7 @@
 
     </div>
 
-    <div class="table">
-      <div class="table-row header">
-        <div class="table-col">
-          Date
-        </div>
-        <div class="table-col">
-          aPTT
-        </div>
-        <div class="table-col">
-          Bolus
-        </div>
-        <div class="table-col">
-          Pump speed
-        </div>
-      </div>
-      <div class="table-row">
-        <div class="table-col">
-          <ion-datetime display-format="DD.MM.YYYY hh:mm"
-                        class="ion-no-padding"
-                        disabled
-                        [value]="patient.actual_aptt_updated_on"></ion-datetime>
-        </div>
-        <div class="table-col">
-          {{patient.actual_aptt}}
-        </div>
-        <div class="table-col">
-          -
-        </div>
-        <div class="table-col">
-          {{patient.actual_dosage}}
-        </div>
-      </div>
-      <div class="table-row" *ngFor="let e of historyEntries">
-        <div class="table-col">
-          <ion-datetime display-format="DD.MM.YYYY hh:mm"
-                        class="ion-no-padding"
-                        disabled
-                        [value]="e.date"></ion-datetime>
-        </div>
-        <div class="table-col">
-          {{e.aptt}}
-        </div>
-        <div class="table-col">
-          {{e.bolus}}
-        </div>
-        <div class="table-col">
-          {{e.heparin_continuous}}
-        </div>
-      </div>
-    </div>
+    <app-history-entries [patient]="patient" [entries]="historyEntries"></app-history-entries>
 
     <div class="buttons">
       <ion-button expand="block" [routerLink]="['/new-aptt', patient.id]">Add new aPTT result</ion-button>

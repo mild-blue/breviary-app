@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { PatientFormComponent } from '../components/patient-form/patient-form.component';
 import { FormsModule } from '@angular/forms';
 import { PatientInfoComponent } from '../components/patient-info/patient-info.component';
+import { HistoryEntriesComponent } from '../components/history-entries/history-entries.component';
 
 // import { RouterModule } from '@angular/router';
 
@@ -12,7 +13,8 @@ import { PatientInfoComponent } from '../components/patient-info/patient-info.co
   declarations: [
     PatientCardComponent,
     PatientFormComponent,
-    PatientInfoComponent
+    PatientInfoComponent,
+    HistoryEntriesComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { PatientInfoComponent } from '../components/patient-info/patient-info.co
     IonicModule,
     PatientCardComponent,
     PatientFormComponent,
-    PatientInfoComponent
+    PatientInfoComponent,
+    HistoryEntriesComponent
   ]
 })
 export class PagesSharedModule {

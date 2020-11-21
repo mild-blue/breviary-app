@@ -8,7 +8,9 @@
 </ion-header>
 
 <ion-content>
+  <app-patient-card [patient]="patient"></app-patient-card>
   <main>
-
+    <h2>History</h2>
+    <app-history-entries [patient]="patient" [entries]="historyEntries"></app-history-entries>
   </main>
 </ion-content>

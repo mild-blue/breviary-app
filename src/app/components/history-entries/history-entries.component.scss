@@ -1,0 +1,44 @@
+@import "../../../styles/variables";
+
+.table {
+  font-size: 12px;
+
+  &-row {
+    display: flex;
+    background: var(--ion-color-primary-contrast);
+    border-bottom: 1px solid $body-bg;
+    opacity: 0.5;
+
+    @media (prefers-color-scheme: dark) {
+      background: rgba($white, .1);
+      border-bottom-color: rgba($white, .3);
+    }
+
+    &.header {
+      font-weight: 700;
+      background: transparent;
+    }
+
+    &.header, &:nth-child(2) {
+      opacity: 1;
+    }
+  }
+
+  &-col {
+    padding: 5px;
+    text-align: center;
+    flex: 1;
+
+    &:first-child {
+      padding-left: 16px;
+      flex-basis: 65px;
+      min-width: 65px;
+    }
+
+    &:last-child {
+      padding-right: 16px;
+      flex-basis: 50px;
+      min-width: 50px;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient } from '@app/model/Patient';
+import { Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 
@@ -11,6 +11,7 @@ import { ApiService } from '@app/services/api/api.service';
 export class HistoryPage implements OnInit {
 
   public patient?: Patient;
+  public historyEntries: PatientHistoryEntry[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService) {
@@ -23,10 +24,18 @@ export class HistoryPage implements OnInit {
   private _initPatient(id: number): void {
     this.apiService.getPatient(id).subscribe((p) => {
       this.patient = p;
+
+      this._getPatientHistory(id);
     });
   }
 
   ngOnInit() {
+  }
+
+  private _getPatientHistory(id: number): void {
+    this.apiService.getPatientHistory(id).subscribe((e => {
+      this.historyEntries = e.slice(2);
+    }));
   }
 
 }

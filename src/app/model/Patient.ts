@@ -16,13 +16,13 @@ export class Patient {
     this.id = '';
     this.first_name = '';
     this.last_name = '';
-    this.date_of_birth = new Date();
-    this.height = 0;
-    this.weight = 0;
+    this.date_of_birth = new Date("1950/01/01");
+    this.height = 175;
+    this.weight = 85;
     this.sex = PatientSex.M;
     this.drug_type = DrugType.H;
     this.target_aptt = {
-      low: 0,
+      low: 2,
       high: 2.5
     };
     this.actual_aptt = 0;

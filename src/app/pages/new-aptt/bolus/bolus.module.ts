@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RecommendationPageRoutingModule } from './recommendation-routing.module';
+import { BolusRoutingModule } from './bolus-routing.module';
 
-import { RecommendationPage } from './recommendation.page';
+import { BolusPage } from './bolus.page';
 import { PagesSharedModule } from '../../pages-shared.module';
 
 @NgModule({
@@ -14,10 +14,10 @@ import { PagesSharedModule } from '../../pages-shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    RecommendationPageRoutingModule,
+    BolusRoutingModule,
     PagesSharedModule
   ],
-  declarations: [RecommendationPage]
+  declarations: [BolusPage]
 })
-export class RecommendationPageModule {
+export class BolusModule {
 }

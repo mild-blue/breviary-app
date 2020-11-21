@@ -5,11 +5,11 @@ import { HeparinRecommendation, Patient } from '@app/model/Patient';
 import { NotificationService } from '@app/services/notification/notification.service';
 
 @Component({
-  selector: 'app-recommendation',
-  templateUrl: './recommendation.page.html',
-  styleUrls: ['./recommendation.page.scss']
+  selector: 'app-bolus',
+  templateUrl: './bolus.page.html',
+  styleUrls: ['./bolus.page.scss']
 })
-export class RecommendationPage implements OnInit {
+export class BolusPage implements OnInit {
 
   public patient?: Patient;
   public r?: HeparinRecommendation;

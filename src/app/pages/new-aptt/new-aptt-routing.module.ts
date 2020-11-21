@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'recommendation',
-    loadChildren: () => import('./recommendation/recommendation.module').then(m => m.RecommendationPageModule)
+    loadChildren: () => import('./bolus/bolus.module').then(m => m.BolusModule)
   },
   {
     path: 'pump-speed/:speed/:reminder',

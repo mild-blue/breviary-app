@@ -31,15 +31,18 @@ export class DetailPage implements OnInit {
               private apiService: ApiService,
               private alertController: AlertController,
               private notificationService: NotificationService) {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id) {
-      this._initPatient(+id);
-    }
   }
 
   ngOnInit() {
     if (this.nextReminderDate) {
       this._initTimeUpdate();
+    }
+  }
+
+  ionViewWillEnter() {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id) {
+      this._initPatient(+id);
     }
   }
 

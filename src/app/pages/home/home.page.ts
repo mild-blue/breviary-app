@@ -21,8 +21,10 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this._initPatients();
-    this.notificationService.scheduleLocalNotification(10);
   }
 
   private _initPatients(): void {

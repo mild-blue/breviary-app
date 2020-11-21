@@ -13,24 +13,7 @@
       Pump speed
     </div>
   </div>
-  <div class="table-row">
-    <div class="table-col">
-      <ion-datetime display-format="DD.MM.YYYY hh:mm"
-                    class="ion-no-padding"
-                    disabled
-                    [value]="patient.actual_aptt_updated_on"></ion-datetime>
-    </div>
-    <div class="table-col">
-      {{patient.actual_aptt}}
-    </div>
-    <div class="table-col">
-      -
-    </div>
-    <div class="table-col">
-      {{patient.actual_dosage}}
-    </div>
-  </div>
-  <div class="table-row" *ngFor="let e of historyEntries">
+  <div class="table-row" *ngFor="let e of entries">
     <div class="table-col">
       <ion-datetime display-format="DD.MM.YYYY hh:mm"
                     class="ion-no-padding"
@@ -44,7 +27,7 @@
       {{e.bolus}}
     </div>
     <div class="table-col">
-      {{e.heparin_continuous}}
+      {{e.heparin_continuous.toFixed(1)}}
     </div>
   </div>
 </div>

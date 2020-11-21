@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PumpSpeedPageRoutingModule } from './pump-speed-routing.module';
+import { RecommendationPageRoutingModule } from './recommendation-routing.module';
 
-import { PumpSpeedPage } from './pump-speed.page';
+import { RecommendationPage } from './recommendation.page';
 import { PagesSharedModule } from '../../pages-shared.module';
 
 @NgModule({
@@ -14,10 +14,10 @@ import { PagesSharedModule } from '../../pages-shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    PumpSpeedPageRoutingModule,
+    RecommendationPageRoutingModule,
     PagesSharedModule
   ],
-  declarations: [PumpSpeedPage]
+  declarations: [RecommendationPage]
 })
-export class PumpSpeedPageModule {
+export class RecommendationPageModule {
 }

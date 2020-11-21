@@ -33,13 +33,16 @@ export class NewApttPage implements OnInit {
     });
   }
 
-  public save(): void {
+  public async save(): Promise<void> {
     if (!this.apttValue || !this.patient) {
       return;
     }
 
-    this.apiService.getPatientHeparinRecommendation(this.patient.id, this.apttValue).subscribe(r => {
-      this.router.navigate(['recommendation', this.patient?.id ?? 0, JSON.stringify(r)]);
+    const recommendation = await this.apiService.getPatientHeparinRecommendation(this.patient.id, this.apttValue);
+    this.router.navigate(['/new-aptt/', this.patient?.id ?? 0, 'recommendation'], {
+      queryParams: {
+        recommendation: JSON.stringify(recommendation)
+      }
     });
   }
 

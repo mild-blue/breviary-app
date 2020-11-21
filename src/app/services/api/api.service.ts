@@ -3,7 +3,7 @@ import { HeparinRecommendation, Patient } from '../../model/Patient';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -48,18 +48,14 @@ export class ApiService {
     );
   }
 
-  public getPatientHeparinRecommendation(id: number, aptt: number): Observable<HeparinRecommendation> {
+  public getPatientHeparinRecommendation(id: number, aptt: number): Promise<Object | HeparinRecommendation> {
     return this.http.post(
-      `${environment.apiUrl}/heparin-recommendation/recommendation/`,
+      `${environment.apiUrl}/heparin-recommendation/recommendation`,
       {
         patient_id: id,
         current_aptt: aptt
       }
-    ).pipe(
-      map((r: Object) => {
-        return r as HeparinRecommendation;
-      })
-    );
+    ).pipe(first()).toPromise();
   }
 
   public findPatientByQR(code: string): Observable<Patient> {

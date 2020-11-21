@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
-import { Patient } from '@app/model/Patient';
+import { HeparinRecommendation, Patient } from '@app/model/Patient';
 
 @Component({
   selector: 'app-recommendation',
@@ -11,11 +11,10 @@ import { Patient } from '@app/model/Patient';
 export class RecommendationPage implements OnInit {
 
   public patient?: Patient;
-
-  public bolus?: number;
-  public pumpSpeed?: number;
+  public r?: HeparinRecommendation;
 
   constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
               private apiService: ApiService) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
@@ -24,6 +23,14 @@ export class RecommendationPage implements OnInit {
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParamMap
+    .subscribe((params) => {
+        const r = params.get('recommendation');
+        if (r) {
+          this.r = JSON.parse(r);
+        }
+      }
+    );
   }
 
   private _initPatient(id: number): void {
@@ -32,15 +39,26 @@ export class RecommendationPage implements OnInit {
     });
   }
 
+  public getDate(): string {
+    if (!this.r) {
+      return '';
+    }
+    const date = this.r.next_remainder;
+    return date.toISOString();
+  }
+
+  public setDate(event: CustomEvent): void {
+    if (!this.r) {
+      return;
+    }
+    this.r.next_remainder = new Date(event.detail.value);
+  }
+
   public save(): void {
-    if (!this.bolus || !this.pumpSpeed || !this.patient) {
+    if (!this.patient) {
       return;
     }
 
-    console.log(this.bolus, this.pumpSpeed);
-
-    // this.apiService.getPatientHeparinRecommendation(this.patient.id, this.apttValue).subscribe(r => {
-    //   this.router.navigate(['recommendation', this.patient?.id ?? 0, JSON.stringify(r)]);
-    // });
+    this.router.navigate(['/detail/', this.patient.id]);
   }
 }

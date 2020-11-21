@@ -11,28 +11,28 @@
 </ion-header>
 
 <ion-content>
-  <app-patient-card [patient]="patient"></app-patient-card>
-  <form (ngSubmit)="save()">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>aPTT result</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item class="ion-no-padding">
-          <ion-input [(ngModel)]="apttValue" name="apttValue" type="number"></ion-input>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
+  <section>
+    <app-patient-card [patient]="patient"></app-patient-card>
+    <form (ngSubmit)="save()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>aPTT result</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item class="ion-no-padding">
+            <ion-input [(ngModel)]="apttValue" name="apttValue" type="number"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-button type="submit"
-                color="primary"
-                expand="block"
-                class="floating-button"
-                (click)="save()"
-                [disabled]="!apttValue">Add
-    </ion-button>
+      <ion-button type="submit"
+                  color="primary"
+                  expand="block"
+                  class="floating-button"
+                  [disabled]="!apttValue">Add
+      </ion-button>
 
-  </form>
+    </form>
 
-
+  </section>
 </ion-content>

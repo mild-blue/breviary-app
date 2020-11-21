@@ -4,54 +4,59 @@
       <ion-back-button default-href="home">Back</ion-back-button>
     </ion-buttons>
     <ion-title>Recommendation</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">Apply</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-patient-card [patient]="patient"></app-patient-card>
+  <section>
+    <app-patient-card [patient]="patient"></app-patient-card>
 
-  <h1>Recommended values</h1>
-  <form (ngSubmit)="save()">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Bolus</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item class="ion-no-padding">
-          <ion-input [(ngModel)]="bolus" name="bolus" type="number" disabled></ion-input>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Pump speed</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item class="ion-no-padding">
-          <ion-input [(ngModel)]="pumpSpeed" name="bolus" type="number" disabled></ion-input>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Next reminder</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-datetime></ion-datetime>
-      </ion-card-content>
-    </ion-card>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle>Doctor's warning</ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        neco
-        <!--        <p>{{}}</p>-->
-      </ion-card-content>
-    </ion-card>
+    <h1>Recommended values</h1>
+    <form (ngSubmit)="save()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Bolus</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item class="ion-no-padding">
+            <ion-input [(ngModel)]="r.heparin_bolus_dosage" name="heparin_bolus_dosage" type="number" disabled></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Pump speed</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item class="ion-no-padding">
+            <ion-input [(ngModel)]="r.heparin_continuous_dosage" name="heparin_continuous_dosage" type="number"></ion-input>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Next reminder</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-datetime [(ngModel)]="r.next_remainder"
+                        name="next_remainder"
+                        displayFormat="DD.MM.YYYY hh:mm"></ion-datetime>
+        </ion-card-content>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Doctor's warning</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ r.doctor_warning}}</p>
+        </ion-card-content>
+      </ion-card>
 
-    <ion-button type="submit" color="primary" expand="block" (click)="save()">Apply</ion-button>
+      <ion-button type="submit" color="primary" expand="block" class="floating-button">Apply</ion-button>
 
-  </form>
-
+    </form>
+  </section>
 </ion-content>

@@ -12,6 +12,7 @@ h1 {
   padding: 30px 16px 40px;
   background: var(--ion-color-primary-contrast);
   margin-bottom: 30px;
+  text-align: center;
 
   @media (prefers-color-scheme: dark) {
     background: rgba($white, .1);

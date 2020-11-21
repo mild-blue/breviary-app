@@ -18,5 +18,8 @@ run-ios: build copy sync
 run-android: build copy sync
 	ionic cap open android
 
+open-android:
+	ionic cap open android
+
 run: npm install
 	ng serve

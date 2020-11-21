@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'more-info',
     loadChildren: () => import('./more-info/more-info.module').then(m => m.MoreInfoPageModule)
+  },
+  {
+    path: 'history',
+    loadChildren: () => import('./history/history.module').then(m => m.HistoryPageModule)
   }
 ];
 

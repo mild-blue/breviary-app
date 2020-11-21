@@ -11,6 +11,7 @@ import { Patient } from '@app/model/Patient';
 export class DetailPage implements OnInit {
 
   public patient?: Patient;
+  public notificationTriggerTime: string = '';
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService) {
@@ -21,12 +22,25 @@ export class DetailPage implements OnInit {
   }
 
   ngOnInit() {
+    this._initTimeUpdate();
   }
 
   private _initPatient(id: number): void {
     this.apiService.getPatient(id).subscribe((p) => {
       this.patient = p;
+
+      this._getPatientHistory(id);
     });
+  }
+
+  private _getPatientHistory(id: number): void {
+    this.apiService.getPatientHistory(id).subscribe();
+  }
+
+  private _initTimeUpdate(): void {
+    setInterval(() => {
+      this.notificationTriggerTime = new Date().toISOString();
+    }, 1000);
   }
 
   public getPatientAge(): number {

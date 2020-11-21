@@ -34,42 +34,85 @@
     </div>
 
     <div class="aptt-header">
-      <h2>aPTT</h2>
+      <span>Notification</span>
       <div class="alert">
         <!-- todo: change true to isNotificationsActive -->
         <ion-icon [name]="true ? 'notifications' : 'notifications-outline'"></ion-icon>
-        <span>3h 25min</span>
+        <ion-datetime display-format="hh:mm:ss"
+                      class="ion-no-padding"
+                      disabled
+                      [value]="notificationTriggerTime"></ion-datetime>
       </div>
     </div>
 
     <ion-list>
-      <ion-item class="ion-no-padding" [detail]="true">
-        <ion-label>Current value</ion-label>
-        <ion-label slot="end">{{ patient.actual_aptt }}</ion-label>
+      <ion-item class="ion-no-padding">
+        <ion-label><strong>aPTT</strong></ion-label>
+        <ion-label>{{ patient.actual_aptt }}</ion-label>
+      </ion-item>
+      <ion-item class="ion-no-padding">
+        <ion-label><strong>Pump speed</strong></ion-label>
+        <ion-label>{{ patient.actual_dosage }}</ion-label>
       </ion-item>
     </ion-list>
 
     <div class="aptt-updated">
       <div>Last update</div>
-      <ion-datetime display-format="DD.MM.YYYY HH:M"
+      <ion-datetime display-format="DD.MM.YYYY hh:mm"
                     class="ion-no-padding"
+                    disabled
                     [value]="patient.actual_aptt_updated_on"></ion-datetime>
     </div>
 
     <div class="buttons">
-      <ion-button>Change aPTT value</ion-button>
-      <ion-button fill="clear">History</ion-button>
+      <ion-button fill="outline">Change aPTT value</ion-button>
+      <ion-button>Stop pump</ion-button>
+
     </div>
 
-    <h2>Pump speed</h2>
-    <ion-list>
-      <ion-item class="ion-no-padding">
-        <ion-label>{{ patient.drug_type | titlecase }}</ion-label>
-        <ion-label slot="end">{{ patient.actual_dosage }}</ion-label>
-      </ion-item>
-    </ion-list>
+    <div class="table">
+      <div class="table-row header">
+        <div class="table-col">
+          Date
+        </div>
+        <div class="table-col">
+          aPTT
+        </div>
+        <div class="table-col">
+          Bolus
+        </div>
+        <div class="table-col">
+          Pump speed
+        </div>
+      </div>
+      <div class="table-row">
+        <div class="table-col">
+          <ion-datetime display-format="DD.MM.YYYY hh:mm"
+                        class="ion-no-padding"
+                        disabled
+                        [value]="patient.actual_aptt_updated_on"></ion-datetime>
+        </div>
+        <div class="table-col">
+          {{patient.actual_aptt}}
+        </div>
+        <div class="table-col">
+          1000
+        </div>
+        <div class="table-col">
+          {{patient.actual_dosage}}
+        </div>
+      </div>
+    </div>
+
+    <!--    <h2>Pump speed</h2>-->
+    <!--    <ion-list>-->
+    <!--      <ion-item class="ion-no-padding">-->
+    <!--        <ion-label>{{ patient.drug_type | titlecase }}</ion-label>-->
+    <!--        <ion-label slot="end">{{ patient.actual_dosage }}</ion-label>-->
+    <!--      </ion-item>-->
+    <!--    </ion-list>-->
     <div class="buttons">
-      <ion-button>Stop</ion-button>
+      <ion-button fill="clear" size="small">show complete history</ion-button>
     </div>
 
   </main>

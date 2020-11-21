@@ -10,7 +10,7 @@ h1 {
 
 .box {
   padding: 30px 16px 40px;
-  background: var(--ion-color-primary-contrast-rgb);
+  background: var(--ion-color-primary-contrast);
   margin-bottom: 30px;
 
   @media (prefers-color-scheme: dark) {
@@ -90,26 +90,41 @@ h1 {
       font-size: 22px;
       margin-right: 10px;
     }
+
+    ion-datetime {
+      font-size: 12px;
+    }
   }
 }
 
 ion-list {
   border-top: 1px solid var(--border-color);
 
+  &.md {
+    padding: 0;
+  }
+
+  ion-item-divider {
+    background: transparent;
+  }
+
   ion-item {
     --inner-padding-start: 16px;
     background: var(--ion-color-primary-contrast);
-    --inner-border-width: 1px;
+
+    &:first-child {
+      --inner-border-width: 1px 0;
+    }
 
     ion-label:not(:first-child):last-child {
       text-align: right;
-      font-weight: 700;
+      //font-weight: 700;
     }
   }
 }
 
 .aptt-updated {
-  padding: 10px 16px 0;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -118,13 +133,45 @@ ion-list {
   opacity: 0.6;
 }
 
+ion-datetime {
+  opacity: 1 !important;
+}
+
 .buttons {
   display: flex;
-  justify-content: center;
+  align-items: center;
   margin-bottom: 40px;
   margin-top: 15px;
+
+  ion-button {
+    flex: 1;
+    margin: 0 16px;
+  }
 }
 
 h2 {
   padding: 0 16px;
+}
+
+.table {
+  font-size: 12px;
+
+  &-row {
+    display: flex;
+    border-bottom: 1px solid var(--ion-color-primary-contrast);
+
+    &.header {
+      font-weight: 700;
+    }
+  }
+
+  &-col {
+    padding: 5px 16px;
+    text-align: center;
+    flex: 2;
+
+    &:last-child, &:first-child {
+      flex: 3;
+    }
+  }
 }

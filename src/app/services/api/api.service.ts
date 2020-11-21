@@ -36,6 +36,18 @@ export class ApiService {
     );
   }
 
+  public getPatientHistory(id: number): Observable<Patient> {
+    return this.http.get(
+      `${environment.apiUrl}/patients/history-entries/${id}`
+    ).pipe(
+      map((r: Object) => {
+        const patient = r as Patient;
+        console.log(r);
+        return patient;
+      })
+    );
+  }
+
   public findPatientByQR(code: string): Observable<Patient> {
     return this.http.get(
       `${environment.apiUrl}/patients/${code}`

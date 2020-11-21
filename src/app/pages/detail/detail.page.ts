@@ -37,7 +37,6 @@ export class DetailPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    console.log('here', this.nextReminderDate);
     if (this.nextReminderDate) {
       this._initTimeUpdate();
     }

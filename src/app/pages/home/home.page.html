@@ -24,6 +24,7 @@
       <ion-list *ngIf="hPatients.length">
         <ion-item *ngFor="let p of hPatients"
                   [detail]="true"
+                  class="ion-no-padding"
                   [routerLink]="['/detail/', p.id]">
           {{p.first_name + ' ' + p.last_name}}
         </ion-item>
@@ -36,6 +37,7 @@
       <ion-list *ngIf="iPatients.length">
         <ion-item *ngFor="let p of iPatients"
                   [detail]="true"
+                  class="ion-no-padding"
                   [routerLink]="['/detail/', p.id]">
           {{p.first_name + ' ' + p.last_name}}
         </ion-item>

@@ -7,4 +7,10 @@ body {
   background: $body-bg;
   color: $body-color;
   margin: 0;
+
+  --ion-background-color: $body-bg;
+
+  ion-content {
+    background: $body-bg;
+  }
 }

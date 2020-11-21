@@ -51,10 +51,12 @@ export interface Interval {
 }
 
 export interface HeparinRecommendation {
-  heparin_continuous_dosage: number;
-  heparin_bolus_dosage: number;
-  next_remainder: Date;
+  actual_heparin_bolus_dosage: number;
+  actual_heparin_continuous_dosage: number;
   doctor_warning: string;
+  next_remainder: Date;
+  previous_heparin_bolus_dosage: number;
+  previous_heparin_continuous_dosage: number;
 }
 
 export interface PatientHistoryEntry {

@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '@app/services/api/api.service';
 import { HeparinRecommendation, Patient } from '@app/model/Patient';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '@app/services/notification/notification.service';
+import { ApiService } from '@app/services/api/api.service';
 
 @Component({
-  selector: 'app-bolus',
-  templateUrl: './bolus.page.html',
-  styleUrls: ['./bolus.page.scss']
+  selector: 'app-recommendation',
+  templateUrl: './recommendation.page.html',
+  styleUrls: ['./recommendation.page.scss']
 })
-export class BolusPage implements OnInit {
-
+export class RecommendationPage implements OnInit {
   public patient?: Patient;
   public r?: HeparinRecommendation;
 
@@ -41,30 +40,17 @@ export class BolusPage implements OnInit {
     });
   }
 
-  public getDate(): string {
+  get nothingToShow(): boolean {
     if (!this.r) {
-      return '';
+      return true;
     }
-    const date = this.r.next_remainder;
-    return date.toISOString();
+    return ((this.r.actual_heparin_bolus_dosage !== undefined &&
+      this.r.actual_heparin_bolus_dosage === this.r.previous_heparin_bolus_dosage) ||
+      !this.r.actual_heparin_bolus_dosage) &&
+      ((this.r.actual_heparin_continuous_dosage !== undefined &&
+        this.r.actual_heparin_continuous_dosage === this.r.previous_heparin_continuous_dosage) ||
+        !this.r.actual_heparin_continuous_dosage) &&
+      !this.r.doctor_warning;
   }
 
-  public setDate(event: CustomEvent): void {
-    if (!this.r) {
-      return;
-    }
-    this.r.next_remainder = new Date(event.detail.value);
-  }
-
-  public save(): void {
-    if (!this.patient) {
-      return;
-    }
-
-    if (this.r) {
-      this.nfService.setNextReminderDate(new Date(this.r.next_remainder));
-    }
-
-    this.router.navigate(['/detail/', this.patient.id]);
-  }
 }

@@ -1,8 +1,7 @@
 {
   "name": "breviary-app",
   "integrations": {
-    "capacitor": {},
-    "cordova": {}
+    "capacitor": {}
   },
   "type": "angular"
 }

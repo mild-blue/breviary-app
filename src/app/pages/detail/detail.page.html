@@ -93,22 +93,24 @@
 
 
     <ion-item-group>
-      <ion-item-divider>
+      <ion-item-divider *ngIf="nextReminderDate !== undefined">
         <ion-icon name="notifications"></ion-icon>
-        Notification
+        Notification is on
+      </ion-item-divider>
+      <ion-item-divider *ngIf="nextReminderDate === undefined">
+        <ion-icon name="notifications-off"></ion-icon>
+        Notification is off
       </ion-item-divider>
       <ion-list>
-        <ion-item class="ion-no-padding">
-          <ion-label>aPTT reminder</ion-label>
-          <ion-toggle></ion-toggle>
-        </ion-item>
-        <ion-item class="ion-no-padding">
-          <ion-label>Time left until next test</ion-label>
-          <ion-datetime display-format="hh:mm:ss"
+        <ion-item class="ion-no-padding" [disabled]="nextReminderDate === undefined">
+          <ion-label *ngIf="nextReminderDate !== undefined">Time left until next test</ion-label>
+          <ion-label *ngIf="nextReminderDate === undefined">Notification is off</ion-label>
+          <ion-datetime *ngIf="nextReminderDate !== undefined"
+                        display-format="hh:mm:ss"
                         class="ion-no-padding"
                         disabled
                         slot="end"
-                        [value]="notificationTriggerTime"></ion-datetime>
+                        [value]="timeLeft"></ion-datetime>
         </ion-item>
       </ion-list>
     </ion-item-group>

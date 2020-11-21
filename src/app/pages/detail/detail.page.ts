@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 import { Patient, PatientHistoryEntry } from '@app/model/Patient';
+import { NotificationService } from '@app/services/notification/notification.service';
 
 @Component({
   selector: 'app-detail',
@@ -12,10 +13,12 @@ export class DetailPage implements OnInit {
 
   public patient?: Patient;
   public historyEntries: PatientHistoryEntry[] = [];
-  public notificationTriggerTime: string = '';
+  public timeLeft: string = '';
+  public nextReminderDate?: Date;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private notificationService: NotificationService) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this._initPatient(+id);
@@ -23,7 +26,10 @@ export class DetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this._initTimeUpdate();
+    this.nextReminderDate = this.notificationService.getNextReminderDate();
+    if (this.nextReminderDate) {
+      this._initTimeUpdate();
+    }
   }
 
   private _initPatient(id: number): void {
@@ -42,7 +48,18 @@ export class DetailPage implements OnInit {
 
   private _initTimeUpdate(): void {
     setInterval(() => {
-      this.notificationTriggerTime = new Date().toISOString();
+      if (this.nextReminderDate) {
+        // todo: luky
+        const start = new Date().getTime();
+        const end = this.nextReminderDate.getTime();
+
+        var diff = (start - end) / 1000;
+        diff /= 60;
+        const seconds = Math.abs(Math.round(diff));
+
+        console.log(seconds);
+        this.timeLeft = '';
+      }
     }, 1000);
   }
 

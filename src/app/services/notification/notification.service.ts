@@ -7,7 +7,28 @@ import { Platform } from '@ionic/angular';
 })
 export class NotificationService {
 
+  private nextReminderDate?: Date;
+
   constructor(private platform: Platform) {
+  }
+
+  public disable(): void {
+    localStorage.removeItem('reminder');
+    this.nextReminderDate = undefined;
+  }
+
+  public setNextReminderDate(date: Date): void {
+    localStorage.setItem('reminder', date.toISOString());
+    this.nextReminderDate = date;
+  }
+
+  public getNextReminderDate(): Date | undefined {
+    const r = localStorage.getItem('reminder');
+    if (r) {
+      return new Date(r);
+    }
+
+    return this.nextReminderDate;
   }
 
   public scheduleLocalNotification(showAfterHr: number): void {

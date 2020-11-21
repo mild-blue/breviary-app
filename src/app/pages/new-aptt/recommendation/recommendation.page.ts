@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 import { HeparinRecommendation, Patient } from '@app/model/Patient';
+import { NotificationService } from '@app/services/notification/notification.service';
 
 @Component({
   selector: 'app-recommendation',
@@ -15,6 +16,7 @@ export class RecommendationPage implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
+              private nfService: NotificationService,
               private apiService: ApiService) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
@@ -57,6 +59,10 @@ export class RecommendationPage implements OnInit {
   public save(): void {
     if (!this.patient) {
       return;
+    }
+
+    if (this.r) {
+      this.nfService.setNextReminderDate(new Date(this.r.next_remainder));
     }
 
     this.router.navigate(['/detail/', this.patient.id]);

@@ -18,6 +18,7 @@
     <ion-item class="ion-no-padding">
       <ion-label position="floating">Date of birth</ion-label>
       <ion-datetime [value]="getPatientDate()"
+                    [min]="startDate"
                     (ionChange)="setPatientDate($event)"
                     name="date_of_birth"
                     displayFormat="DD.MM.YYYY"></ion-datetime>

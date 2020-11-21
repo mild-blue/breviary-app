@@ -30,7 +30,9 @@ export class PatientFormComponent implements OnInit {
 
   public getPatientDate(): string {
     if (!this.patient?.date_of_birth) {
-      return '';
+      const date = new Date();
+      date.setFullYear(1950);
+      return date.toISOString();
     }
     const date = this.patient.date_of_birth;
     return date.toISOString();
@@ -45,7 +47,7 @@ export class PatientFormComponent implements OnInit {
 
   public getPatientRange(): IntervalRange | undefined {
     if (!this.patient?.target_aptt) {
-      return { lower: 1.5, upper: 3 };
+      return { lower: 2, upper: 2.5 };
     }
     return { lower: this.patient.target_aptt.low, upper: this.patient.target_aptt.high };
   }

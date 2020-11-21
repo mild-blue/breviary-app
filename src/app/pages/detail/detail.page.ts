@@ -5,6 +5,7 @@ import { Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { NotificationService } from '@app/services/notification/notification.service';
 
 interface TimeDiff {
+  days: string
   hours: string
   minutes: string
   seconds: string
@@ -56,7 +57,7 @@ export class DetailPage implements OnInit {
     setInterval(() => {
       if (this.nextReminderDate) {
         const timeDiff = DetailPage._get_time_diff(this.nextReminderDate, new Date())
-        this.timeLeft = `${timeDiff.hours}:${timeDiff.minutes}:${timeDiff.seconds}`;
+        this.timeLeft = `${timeDiff.days}d ${timeDiff.hours}:${timeDiff.minutes}:${timeDiff.seconds}`;
       }
     }, 1000);
   }
@@ -68,6 +69,7 @@ export class DetailPage implements OnInit {
   private static _get_time_diff(reminderDate: Date, now: Date): TimeDiff {
     if (reminderDate.getTime() <= now.getTime()) {
       return {
+        days: '0',
         hours: '0',
         minutes: '0',
         seconds: '0',
@@ -88,6 +90,7 @@ export class DetailPage implements OnInit {
     const seconds = Math.floor(delta % 60);
 
     return {
+      days: `${days}`,
       hours: DetailPage._formatNumber(hours),
       minutes: DetailPage._formatNumber(minutes),
       seconds: DetailPage._formatNumber(seconds)

@@ -55,7 +55,6 @@ export class ApiService {
         weight: patient.weight ?? 0,
         drug_type: patient.drug_type?.valueOf() ?? DrugType.H,
         sex: patient.sex?.valueOf() ?? PatientSex.M,
-        target_aptt_value: 0, // todo remove
         target_aptt_low: patient.target_aptt?.low ?? 0,
         target_aptt_high: patient.target_aptt?.high ?? 0,
         tddi: patient.tddi ?? 0,
@@ -77,7 +76,6 @@ export class ApiService {
         date_of_birth: patient.date_of_birth?.toISOString() ?? new Date(),
         height: patient.height ?? 0,
         weight: patient.weight ?? 0,
-        target_aptt_value: 0, // todo remove
         drug_type: patient.drug_type?.valueOf() ?? DrugType.H,
         sex: patient.sex?.valueOf() ?? PatientSex.M,
         target_aptt_low: patient.target_aptt?.low ?? 0,
@@ -104,7 +102,7 @@ export class ApiService {
 
   public getPatientHeparinRecommendation(id: number, aptt: number): Promise<Object | HeparinRecommendation> {
     return this.http.post(
-      `${environment.apiUrl}/heparin-recommendation/recommendation`,
+      `${environment.apiUrl}/recommendation/heparin`,
       {
         patient_id: id,
         current_aptt: aptt

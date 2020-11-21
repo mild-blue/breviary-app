@@ -4,9 +4,9 @@
       <ion-back-button default-href="home"></ion-back-button>
     </ion-buttons>
     <ion-title>Calculation result</ion-title>
-    <ion-buttons slot="end" *ngIf="patient">
-      <ion-button [routerLink]="['/detail', patient.id]">
-        Finish
+    <ion-buttons slot="end">
+      <ion-button (click)="accept()">
+        Accept
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -69,11 +69,11 @@ r.actual_heparin_continuous_dosage !== r.previous_heparin_continuous_dosage">
       </ion-card-header>
     </ion-card>
 
-    <ion-button [routerLink]="['/detail', patient.id]"
+    <ion-button (click)="accept()"
                 color="primary"
                 expand="block"
                 class="floating-button">
-      Finish
+      Accept
     </ion-button>
   </section>
 </ion-content>

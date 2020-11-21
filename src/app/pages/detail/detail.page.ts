@@ -34,12 +34,14 @@ export class DetailPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.nextReminderDate) {
-      this._initTimeUpdate();
-    }
   }
 
   ionViewWillEnter() {
+    console.log('here', this.nextReminderDate);
+    if (this.nextReminderDate) {
+      this._initTimeUpdate();
+    }
+
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this._initPatient(+id);
@@ -67,14 +69,21 @@ export class DetailPage implements OnInit {
   private _initTimeUpdate(): void {
     setInterval(() => {
       if (this.nextReminderDate) {
-        const timeDiff = DetailPage._get_time_diff(this.nextReminderDate, new Date())
-        this.timeLeft = `${timeDiff.hours}:${timeDiff.minutes}:${timeDiff.seconds}`;
+        const timeDiff = DetailPage._get_time_diff(this.nextReminderDate, new Date());
+        this.timeLeft = '';
+        if (timeDiff.days !== '0') {
+          this.timeLeft += `${timeDiff.days} days `;
+        }
+        this.timeLeft += `${timeDiff.hours === '00' ? '0' : timeDiff.hours}:${timeDiff.minutes}:${timeDiff.seconds}`;
+        if (this.timeLeft === '0:0:0') {
+          this.timeLeft = '';
+        }
       }
     }, 1000);
   }
 
   private static _formatNumber(num: number) {
-    return num < 10 ? `0${num}` : `${num}`
+    return num < 10 ? `0${num}` : `${num}`;
   }
 
   private static _get_time_diff(reminderDate: Date, now: Date): TimeDiff {
@@ -83,8 +92,8 @@ export class DetailPage implements OnInit {
         days: '0',
         hours: '0',
         minutes: '0',
-        seconds: '0',
-      }
+        seconds: '0'
+      };
     }
 
     let delta = Math.abs(reminderDate.getTime() - now.getTime()) / 1000;
@@ -105,18 +114,24 @@ export class DetailPage implements OnInit {
       hours: DetailPage._formatNumber(hours),
       minutes: DetailPage._formatNumber(minutes),
       seconds: DetailPage._formatNumber(seconds)
-    }
+    };
   }
 
   public toggleReminder(): void {
-    this.reminderOn = !this.reminderOn;
-
-    if (this.reminderOn) {
-      if (this.datetime) {
-        this.datetime.open();
-      }
-    } else {
+    console.log('toggle', this.nextReminderDate);
+    if (this.nextReminderDate !== undefined) {
       this.notificationService.disable();
+      this.timeLeft = '';
+    } else {
+      this.notificationService.setNextReminderDate(new Date());
+      this._initTimeUpdate();
+    }
+  }
+
+  public handleReminderDateChange(event: CustomEvent): void {
+    const date = new Date(event.detail.value);
+    if (date != this.nextReminderDate) {
+      this.notificationService.setNextReminderDate(date);
     }
   }
 

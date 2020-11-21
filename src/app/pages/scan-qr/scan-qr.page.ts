@@ -25,9 +25,9 @@ export class ScanQrPage implements OnInit {
         this.qrContent = barcodeData.text;
 
         if (this.qrContent) {
-          this.apiService.findPatientByQR(this.qrContent).subscribe(
+          this.apiService.findPatientByQR().subscribe(
             (p) => {
-              this.router.navigate(['/detail', p.id]);
+              this.router.navigate(['/detail/', p.id, '/more-info']);
             },
             () => this.presentAlert('No patient found in database.'));
         }

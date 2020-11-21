@@ -34,7 +34,7 @@
     </ion-item>
     <ion-item class="ion-no-padding" lines="none">
       <ion-label slot="start">Target aPTT value</ion-label>
-      <ion-label slot="end" class="ion-text-right">{{ patient.target_aptt.low }}, {{patient.target_aptt.high}}</ion-label>
+      <ion-label slot="end" class="ion-text-right" *ngIf="patient.target_aptt">{{ patient.target_aptt.low }}, {{patient.target_aptt.high}}</ion-label>
     </ion-item>
     <ion-item class="ion-no-padding">
       <ion-range min="1.5" max="3" color="primary" step="0.1" dual-knobs

@@ -20,9 +20,9 @@ export class NewPatientPage implements OnInit {
   }
 
   public save(patient: Patient): void {
-    this.apiService.savePatient(patient).subscribe(p => {
+    this.apiService.addPatient(patient).subscribe(p => {
       console.log('P from BE', p);
-      this.router.navigate(['/home']);
+      // this.router.navigate(['/home']);
     });
   }
 }

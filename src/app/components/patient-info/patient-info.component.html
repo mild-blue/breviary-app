@@ -8,7 +8,7 @@
       <div class="value">{{ patient.weight }}</div>
       <div class="label">weight</div>
     </li>
-    <li>
+    <li *ngIf="patient.target_aptt && patient.target_aptt.low && patient.target_aptt.high">
       <div class="value">{{ patient.target_aptt.low }} - {{patient.target_aptt.high}}</div>
       <div class="label">target aptt</div>
     </li>

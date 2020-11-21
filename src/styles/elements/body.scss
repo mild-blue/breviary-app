@@ -38,3 +38,12 @@ ion-card {
     }
   }
 }
+
+
+button, ion-button {
+
+  &:focus {
+    outline: none !important;
+  }
+
+}

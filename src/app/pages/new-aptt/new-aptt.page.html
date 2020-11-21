@@ -3,10 +3,36 @@
     <ion-buttons slot="start">
       <ion-back-button default-href="home">Cancel</ion-back-button>
     </ion-buttons>
-    <ion-title>New aPTT entry</ion-title>
+    <ion-title>New aPTT result</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card *ngIf="patient">
+    <ion-card-header>
+      <ion-card-subtitle>Patient</ion-card-subtitle>
+      <ion-card-title>{{ patient.first_name }} {{patient.last_name}}, {{getPatientAge()}}</ion-card-title>
+      <ion-note>ID: {{patient.id}}</ion-note>
+    </ion-card-header>
+  </ion-card>
+  <form (ngSubmit)="save()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>aPTT result</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+
+        <ion-item class="ion-no-padding">
+          <ion-input [(ngModel)]="apttValue" name="apttValue" type="number"></ion-input>
+        </ion-item>
+
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button type="submit" color="primary" expand="block" (click)="save()" [disabled]="!apttValue">Add</ion-button>
+
+  </form>
+
 
 </ion-content>

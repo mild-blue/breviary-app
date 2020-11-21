@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Patient } from '../../model/Patient';
+import { HeparinRecommendation, Patient } from '../../model/Patient';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -44,6 +44,20 @@ export class ApiService {
         const patient = r as Patient;
         console.log(r);
         return patient;
+      })
+    );
+  }
+
+  public getPatientHeparinRecommendation(id: number, aptt: number): Observable<HeparinRecommendation> {
+    return this.http.post(
+      `${environment.apiUrl}/heparin-recommendation/recommendation/`,
+      {
+        patient_id: id,
+        current_aptt: aptt
+      }
+    ).pipe(
+      map((r: Object) => {
+        return r as HeparinRecommendation;
       })
     );
   }

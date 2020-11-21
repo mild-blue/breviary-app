@@ -45,3 +45,10 @@ export interface Interval {
   low: number;
   high: number;
 }
+
+export interface HeparinRecommendation {
+  heparin_continuous_dosage: number;
+  heparin_bolus_dosage: number;
+  next_remainder: Date;
+  doctor_warning: string;
+}

@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/detail/detail.module').then(m => m.DetailPageModule)
   },
   {
-    path: 'new-aptt',
+    path: 'new-aptt/:id',
     loadChildren: () => import('./pages/new-aptt/new-aptt.module').then(m => m.NewApttPageModule)
   }
 ];

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '@app/model/Patient';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-new-aptt',
@@ -14,7 +15,9 @@ export class NewApttPage implements OnInit {
   public apttValue?: number;
 
   constructor(private activatedRoute: ActivatedRoute,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private location: Location,
+              private router: Router) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
       this._initPatient(+id);
@@ -30,22 +33,17 @@ export class NewApttPage implements OnInit {
     });
   }
 
-  public getPatientAge(): number {
-    if (!this.patient) {
-      return 0;
-    }
-    const ageDifMs = Date.now() - this.patient.date_of_birth.getTime();
-    const ageDate = new Date(ageDifMs); // miliseconds from epoch
-    return Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
   public save(): void {
     if (!this.apttValue || !this.patient) {
       return;
     }
 
     this.apiService.getPatientHeparinRecommendation(this.patient.id, this.apttValue).subscribe(r => {
-
+      this.router.navigate(['recommendation', this.patient?.id ?? 0, JSON.stringify(r)]);
     });
+  }
+
+  public cancel(): void {
+    this.location.back();
   }
 }

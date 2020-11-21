@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { NewApttPageRoutingModule } from './new-aptt-routing.module';
 
 import { NewApttPage } from './new-aptt.page';
+import { PagesSharedModule } from '../pages-shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NewApttPageRoutingModule
+    NewApttPageRoutingModule,
+    PagesSharedModule
   ],
   declarations: [NewApttPage]
 })

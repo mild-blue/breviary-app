@@ -25,6 +25,7 @@ import { AlertComponent } from '@app/components/alert/alert.component';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

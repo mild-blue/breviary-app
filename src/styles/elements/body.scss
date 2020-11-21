@@ -16,5 +16,9 @@ body {
 }
 
 ion-picker {
-  --ion-background-color: #fff;
+  --ion-background-color: var(--ion-color-primary-contrast);
+}
+
+ion-card {
+  background: var(--ion-color-primary-contrast);
 }

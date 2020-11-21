@@ -1,5 +1,5 @@
 export class Patient {
-  id: string;
+  id: number;
   first_name: string;
   last_name: string;
   date_of_birth: Date;
@@ -13,7 +13,7 @@ export class Patient {
   drug_type: DrugType;
 
   constructor() {
-    this.id = '';
+    this.id = 0;
     this.first_name = '';
     this.last_name = '';
     this.date_of_birth = new Date("1950/01/01");

@@ -18,5 +18,15 @@ run-ios: build copy sync
 run-android: build copy sync
 	ionic cap open android
 
-run: npm install
+open-android:
+	ionic cap open android
+
+run:
+	npm install
 	ng serve
+
+docker-build:
+	docker build -t mildblue/breviary-app .
+
+docker-run:
+	docker run -p 8080:80 --rm mildblue/breviary-app

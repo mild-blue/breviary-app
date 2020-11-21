@@ -24,3 +24,6 @@ open-android:
 run:
 	npm install
 	ng serve
+
+docker-build:
+	docker build -t mildblue/breviary-app .

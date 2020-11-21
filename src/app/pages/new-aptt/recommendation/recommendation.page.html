@@ -25,14 +25,14 @@
       </ion-card-header>
       <ion-card-content>
         <p>{{ r.doctor_warning}}</p>
-        <strong>You should contact the doctor before making any changes</strong>
+        <strong>You should contact the doctor before making any changes.</strong>
       </ion-card-content>
     </ion-card>
 
     <ion-card *ngIf="r.actual_heparin_bolus_dosage && r.previous_heparin_bolus_dosage !== r.actual_heparin_bolus_dosage">
       <ion-card-header>
         <ion-card-subtitle>Apply bolus</ion-card-subtitle>
-        <ion-card-title>{{ r.actual_heparin_bolus_dosage }}
+        <ion-card-title align="center">{{ r.actual_heparin_bolus_dosage }}
           <ion-note>ml</ion-note>
         </ion-card-title>
       </ion-card-header>

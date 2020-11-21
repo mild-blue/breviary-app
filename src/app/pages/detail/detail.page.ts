@@ -68,7 +68,7 @@ export class DetailPage implements OnInit {
     setInterval(() => {
       if (this.nextReminderDate) {
         const timeDiff = DetailPage._get_time_diff(this.nextReminderDate, new Date())
-        this.timeLeft = `${timeDiff.days}d ${timeDiff.hours}:${timeDiff.minutes}:${timeDiff.seconds}`;
+        this.timeLeft = `${timeDiff.hours}:${timeDiff.minutes}:${timeDiff.seconds}`;
       }
     }, 1000);
   }

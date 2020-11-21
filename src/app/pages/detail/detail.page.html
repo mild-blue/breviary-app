@@ -104,12 +104,7 @@
         <ion-item class="ion-no-padding" [disabled]="nextReminderDate === undefined">
           <ion-label *ngIf="nextReminderDate !== undefined">Time left until next test</ion-label>
           <ion-label *ngIf="nextReminderDate === undefined">Notification is off</ion-label>
-          <ion-datetime *ngIf="nextReminderDate !== undefined"
-                        display-format="hh:mm:ss"
-                        class="ion-no-padding"
-                        disabled
-                        slot="end"
-                        [value]="timeLeft"></ion-datetime>
+          <ion-note>{{nextReminderDate !== undefined ? timeLeft : '-' }}</ion-note>
         </ion-item>
       </ion-list>
     </ion-item-group>

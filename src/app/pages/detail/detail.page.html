@@ -92,22 +92,28 @@
     </div>
 
     <ion-item-group>
-      <ion-item-divider *ngIf="nextReminderDate !== undefined">
+      <ion-item-divider *ngIf="reminderOn">
         <ion-icon name="notifications"></ion-icon>
         Notification is on
       </ion-item-divider>
-      <ion-item-divider *ngIf="nextReminderDate === undefined">
+      <ion-item-divider *ngIf="!reminderOn">
         <ion-icon name="notifications-off"></ion-icon>
         Notification is off
       </ion-item-divider>
       <ion-list>
-        <ion-item class="ion-no-padding" [disabled]="nextReminderDate === undefined">
+        <ion-item>
+          <ion-label>Enable</ion-label>
+          <ion-toggle [checked]="reminderOn"
+                      (ionChange)="toggleReminder()"></ion-toggle>
+        </ion-item>
+        <ion-item class="ion-no-padding" [disabled]="!reminderOn">
           <ion-label *ngIf="nextReminderDate !== undefined">Time left until next test</ion-label>
-          <ion-label *ngIf="nextReminderDate === undefined">Notification is off</ion-label>
-          <ion-note>{{nextReminderDate !== undefined ? timeLeft : '-' }}</ion-note>
+          <ion-note>{{ nextReminderDate !== undefined ? timeLeft : '-' }}</ion-note>
         </ion-item>
       </ion-list>
     </ion-item-group>
+
+    <ion-datetime #datetime></ion-datetime>
 
     <div class="btn-center">
       <ion-button>Stop the pump</ion-button>

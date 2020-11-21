@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 import { Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { NotificationService } from '@app/services/notification/notification.service';
+import { IonDatetime } from '@ionic/angular';
 
 interface TimeDiff {
   days: string
@@ -18,10 +19,12 @@ interface TimeDiff {
 })
 export class DetailPage implements OnInit {
 
+  @ViewChild('datetime') datetime?: IonDatetime;
+
   public patient?: Patient;
   public historyEntries: PatientHistoryEntry[] = [];
   public timeLeft: string = '';
-  public nextReminderDate?: Date;
+  public reminderOn?: boolean;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService,
@@ -33,10 +36,13 @@ export class DetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.nextReminderDate = this.notificationService.getNextReminderDate();
     if (this.nextReminderDate) {
       this._initTimeUpdate();
     }
+  }
+
+  get nextReminderDate(): Date | undefined {
+    return this.notificationService.getNextReminderDate();
   }
 
   private _initPatient(id: number): void {
@@ -105,5 +111,17 @@ export class DetailPage implements OnInit {
     const ageDifMs = Date.now() - this.patient.date_of_birth.getTime();
     const ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  public toggleReminder(): void {
+    this.reminderOn = !this.reminderOn;
+
+    if (this.reminderOn) {
+      if (this.datetime) {
+        this.datetime.open();
+      }
+    } else {
+      this.notificationService.disable();
+    }
   }
 }

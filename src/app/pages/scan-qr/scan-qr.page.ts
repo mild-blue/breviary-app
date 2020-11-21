@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-scan-qr',
@@ -6,11 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scan-qr.page.scss']
 })
 export class ScanQrPage implements OnInit {
+  qrContent?: string
 
-  constructor() {
-  }
+  constructor(private barcodeScanner: BarcodeScanner) {}
 
   ngOnInit() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      if(!barcodeData.cancelled) {
+        this.qrContent = barcodeData.text
+      }
+    }).catch(err => {
+      console.log('Error', err);
+    });
   }
-
 }

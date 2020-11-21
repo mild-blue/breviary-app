@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ApiService } from '@app/services/api/api.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,6 +14,7 @@ export class ScanQrPage implements OnInit {
 
   constructor(private barcodeScanner: BarcodeScanner,
               private alertController: AlertController,
+              private toastController: ToastController,
               private router: Router,
               private apiService: ApiService) {
   }
@@ -27,7 +28,9 @@ export class ScanQrPage implements OnInit {
         if (this.qrContent) {
           this.apiService.findPatientByQR().subscribe(
             (p) => {
-              this.router.navigate(['/detail/', p.id, '/more-info']);
+              this.presentToast('Patient retrieved from IKEM database').then(() => {
+                this.router.navigate(['/detail/', p.id, '/more-info']);
+              });
             },
             () => this.presentAlert('No patient found in database.'));
         }
@@ -35,6 +38,18 @@ export class ScanQrPage implements OnInit {
     }).catch(err => {
       console.log('Error', err);
     });
+  }
+
+  async presentToast(text: string): Promise<void> {
+    const toast = await this.toastController.create({
+      message: text,
+      duration: 2000,
+      position: 'top',
+      color: 'success',
+      cssClass: 'ion-text-center'
+    });
+
+    return toast.present();
   }
 
   async presentAlert(text: string) {

@@ -48,11 +48,18 @@ export class ApiService {
     return this.http.put(
       `${environment.apiUrl}/patients/${patient.id}`,
       {
-        drug_type: patient.drug_type,
+        first_name: patient.first_name ?? '',
+        last_name: patient.last_name ?? '',
+        date_of_birth: patient.date_of_birth?.toISOString() ?? new Date(),
+        height: patient.height ?? 0,
+        weight: patient.weight ?? 0,
+        drug_type: patient.drug_type?.valueOf() ?? DrugType.H,
+        sex: patient.sex?.valueOf() ?? PatientSex.M,
+        target_aptt_value: 0, // todo remove
         target_aptt_low: patient.target_aptt?.low ?? 0,
         target_aptt_high: patient.target_aptt?.high ?? 0,
-        tddi: patient.tddi,
-        target_glycemia: patient.target_glycemia
+        tddi: patient.tddi ?? 0,
+        target_glycemia: patient.target_glycemia ?? 0
       }
     ).pipe(
       map((r: Object) => {
@@ -70,6 +77,7 @@ export class ApiService {
         date_of_birth: patient.date_of_birth?.toISOString() ?? new Date(),
         height: patient.height ?? 0,
         weight: patient.weight ?? 0,
+        target_aptt_value: 0, // todo remove
         drug_type: patient.drug_type?.valueOf() ?? DrugType.H,
         sex: patient.sex?.valueOf() ?? PatientSex.M,
         target_aptt_low: patient.target_aptt?.low ?? 0,

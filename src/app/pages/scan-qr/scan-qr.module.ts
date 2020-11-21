@@ -8,6 +8,9 @@ import { ScanQrPageRoutingModule } from './scan-qr-routing.module';
 
 import { ScanQrPage } from './scan-qr.page';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +18,10 @@ import { ScanQrPage } from './scan-qr.page';
     IonicModule,
     ScanQrPageRoutingModule
   ],
-  declarations: [ScanQrPage]
+  declarations: [ScanQrPage],
+  providers: [
+    BarcodeScanner
+  ]
 })
 export class ScanQrPageModule {
 }

@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets">
+    <platform name="ios">
+        <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+            <string>To scan barcodes</string>
+        </edit-config>
+    </platform>
+</widget>

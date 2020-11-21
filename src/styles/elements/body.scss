@@ -17,6 +17,10 @@ body {
 
 ion-picker {
   --ion-background-color: var(--ion-color-primary-contrast);
+
+  @media (prefers-color-scheme: dark) {
+    --ion-background-color: #1c1c1c;
+  }
 }
 
 ion-card {

@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
+  <ion-toolbar [color]="type === types.H ? 'primary' : 'secondary'">
     <ion-buttons slot="start">
-      <ion-button routerLink="/new" routerDirection="back">Cancel</ion-button>
+      <ion-button [routerLink]="['/new', type]" routerDirection="back">Cancel</ion-button>
     </ion-buttons>
     <ion-title>Scan QR</ion-title>
   </ion-toolbar>

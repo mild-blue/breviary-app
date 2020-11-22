@@ -16,7 +16,7 @@
   <main>
     <ion-button fill="outline" expand="block"
                 [color]="patient.drug_type === types.H ? 'primary' : 'secondary'"
-                routerLink="/scan-qr"
+                [routerLink]="['/scan-qr', patient.drug_type]"
                 routerDirection="forward">Scan QR code
     </ion-button>
 

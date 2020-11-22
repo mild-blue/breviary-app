@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ApiService } from '@app/services/api/api.service';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DrugType } from '@app/model/Patient';
 
 @Component({
   selector: 'app-scan-qr',
@@ -11,11 +12,16 @@ import { Router } from '@angular/router';
 })
 export class ScanQrPage implements OnInit {
   public qrContent?: string;
+  public type: DrugType = DrugType.H;
+  public types: typeof DrugType = DrugType;
 
-  constructor(private barcodeScanner: BarcodeScanner,
+  constructor(private activatedRoute: ActivatedRoute,
+              private barcodeScanner: BarcodeScanner,
               private alertController: AlertController,
               private router: Router,
               private apiService: ApiService) {
+    const type = this.activatedRoute.snapshot.paramMap.get('type');
+    this.type = type && type.toUpperCase() === DrugType.I.valueOf() ? DrugType.I : DrugType.H;
   }
 
   ngOnInit() {
@@ -27,7 +33,7 @@ export class ScanQrPage implements OnInit {
         if (this.qrContent) {
           this.apiService.findPatientByQR().subscribe(
             (p) => {
-              // todo set patinet drug_type from homepage !!!!!
+              p.drug_type = this.type;
               this.presentSuccessAlert('Patient retrieved from IKEM database.', p.id);
             },
             () => this.presentAlert('No patient found in database.'));
@@ -61,7 +67,7 @@ export class ScanQrPage implements OnInit {
         {
           text: 'Add patient manually',
           handler: () => {
-            this.router.navigate(['/new']);
+            this.router.navigate(['/new', this.type]);
           }
         },
         {

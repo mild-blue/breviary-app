@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
-import { Patient } from '@app/model/Patient';
+import { DrugType, Patient } from '@app/model/Patient';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -12,6 +12,7 @@ import { ToastController } from '@ionic/angular';
 export class MoreInfoPage implements OnInit {
 
   public patient?: Patient;
+  public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
               private toastController: ToastController,

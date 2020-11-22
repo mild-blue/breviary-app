@@ -1,4 +1,5 @@
-<div *ngIf="patient" class="patient-info">
+<div *ngIf="patient" class="patient-info"
+     [class.insulin]="patient.drug_type === types.I">
   <ul>
     <li>
       <div class="value">{{ getPatientAge() }}</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient, PatientHistoryEntry } from '@app/model/Patient';
+import { DrugType, Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 
@@ -12,6 +12,7 @@ export class HistoryPage implements OnInit {
 
   public patient?: Patient;
   public historyEntries: PatientHistoryEntry[] = [];
+  public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService) {

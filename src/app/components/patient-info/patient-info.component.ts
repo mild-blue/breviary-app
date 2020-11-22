@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Patient } from '@app/model/Patient';
+import { DrugType, Patient } from '@app/model/Patient';
 
 @Component({
   selector: 'app-patient-info',
@@ -9,6 +9,7 @@ import { Patient } from '@app/model/Patient';
 export class PatientInfoComponent implements OnInit {
 
   @Input() patient?: Patient;
+  public types: typeof DrugType = DrugType;
 
   constructor() {
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HeparinRecommendation, Patient } from '@app/model/Patient';
+import { DrugType, HeparinRecommendation, Patient } from '@app/model/Patient';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '@app/services/notification/notification.service';
 import { ApiService } from '@app/services/api/api.service';
@@ -12,6 +12,7 @@ import { ApiService } from '@app/services/api/api.service';
 export class RecommendationPage implements OnInit {
   public patient?: Patient;
   public r?: HeparinRecommendation;
+  public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,

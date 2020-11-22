@@ -6,6 +6,12 @@
   flex-direction: column;
   justify-content: center;
 
+  &.insulin {
+    li:not(:last-child)::after {
+      background: var(--ion-color-secondary);
+    }
+  }
+
   ul {
     list-style: none;
     margin: 0;

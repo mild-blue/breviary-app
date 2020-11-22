@@ -19,15 +19,23 @@
       <app-patient-info [patient]="patient"></app-patient-info>
 
       <div class="btn-center no-margin">
-        <ion-button size="small" fill="outline" [routerLink]="['more-info']">More patient information</ion-button>
+        <ion-button size="small"
+                    fill="outline"
+                    [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
+                    [routerLink]="['more-info']">More patient information
+        </ion-button>
       </div>
     </div>
 
     <app-history-entries [patient]="patient" [entries]="historyEntries"></app-history-entries>
 
     <div class="buttons">
-      <ion-button expand="block" [routerLink]="['/new-aptt', patient.id]">Add new aPTT result</ion-button>
-      <ion-button fill="clear" size="small" [routerLink]="['history']">show complete history</ion-button>
+      <ion-button expand="block" [routerLink]="['/new-aptt', patient.id]"
+                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">Add new aPTT result
+      </ion-button>
+      <ion-button fill="clear" size="small" [routerLink]="['history']"
+                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">show complete history
+      </ion-button>
     </div>
 
     <ion-item-group>
@@ -40,7 +48,8 @@
       <ion-item class="ion-no-padding" [detail]="false" (click)="toggleReminder()">
         <ion-label>Notification</ion-label>
         <div class="no-events">
-          <ion-toggle [checked]="nextReminderDate !== undefined"></ion-toggle>
+          <ion-toggle [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
+                      [checked]="nextReminderDate !== undefined"></ion-toggle>
         </div>
       </ion-item>
       <ion-item class="ion-no-padding" *ngIf="nextReminderDate !== undefined">
@@ -52,7 +61,10 @@
     </ion-list>
 
     <div class="btn-center">
-      <ion-button (click)="presentAlert()" [disabled]="isStopped">Stop the pump</ion-button>
+      <ion-button (click)="presentAlert()"
+                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
+                  [disabled]="isStopped">Stop the pump
+      </ion-button>
     </div>
 
   </main>

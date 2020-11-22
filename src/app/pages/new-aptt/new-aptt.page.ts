@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient } from '@app/model/Patient';
+import { DrugType, Patient } from '@app/model/Patient';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 import { Location } from '@angular/common';
@@ -13,6 +13,7 @@ export class NewApttPage implements OnInit {
 
   public patient?: Patient;
   public apttValue?: number;
+  public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService,

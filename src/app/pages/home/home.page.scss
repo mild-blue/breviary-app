@@ -9,6 +9,10 @@ ion-segment {
     background-color: rgba(var(--ion-color-primary-rgb), .7);
     color: var(--ion-color-primary-contrast);
 
+    &.insulin {
+      background-color: rgba(var(--ion-color-secondary-rgb), .7);
+    }
+
     @media (prefers-color-scheme: dark) {
       --ion-color-step-350: #fff;
     }

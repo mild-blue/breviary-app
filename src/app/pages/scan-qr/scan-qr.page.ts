@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ApiService } from '@app/services/api/api.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DrugType } from '@app/model/Patient';
+import { DrugType, Patient } from '@app/model/Patient';
+import { ModalPage } from '@app/pages/modal/modal.page';
 
 @Component({
   selector: 'app-scan-qr',
@@ -18,6 +19,7 @@ export class ScanQrPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private barcodeScanner: BarcodeScanner,
               private alertController: AlertController,
+              public modalController: ModalController,
               private router: Router,
               private apiService: ApiService) {
     const type = this.activatedRoute.snapshot.paramMap.get('type');
@@ -33,7 +35,7 @@ export class ScanQrPage implements OnInit {
         if (this.qrContent) {
           this.apiService.findPatientByQR().subscribe(
             (p) => {
-              this.presentSuccessAlert('Patient retrieved from IKEM database.', p.id);
+              this.presentSuccessAlert(p);
             },
             () => this.presentAlert('No patient found in database.'));
         }
@@ -43,20 +45,16 @@ export class ScanQrPage implements OnInit {
     });
   }
 
-  async presentSuccessAlert(text: string, id: number) {
-    const alert = await this.alertController.create({
-      message: text,
-      buttons: [
-        {
-          text: 'OK',
-          handler: () => {
-            this.router.navigate(['/detail', id, this.type, 'more-info']);
-          }
-        }
-      ]
+  async presentSuccessAlert(patient: Patient) {
+    const modal = await this.modalController.create({
+      component: ModalPage,
+      cssClass: 'success-modal',
+      componentProps: {
+        'patient': patient,
+        'type': this.type
+      }
     });
-
-    await alert.present();
+    return await modal.present();
   }
 
   async presentAlert(text: string) {

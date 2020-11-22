@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
 import { DrugType, Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { NotificationService } from '@app/services/notification/notification.service';
-import { AlertController, IonDatetime } from '@ionic/angular';
+import { AlertController, IonDatetime, ModalController } from '@ionic/angular';
 
 interface TimeDiff {
   days: string
@@ -33,6 +33,7 @@ export class DetailPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService,
               private alertController: AlertController,
+              private modalController: ModalController,
               private notificationService: NotificationService) {
     const type = this.activatedRoute.snapshot.paramMap.get('type');
     this.color = type && type.toUpperCase() === DrugType.I ? 'secondary' : 'primary';

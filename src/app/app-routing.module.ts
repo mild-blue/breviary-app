@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'new-aptt/:id',
     loadChildren: () => import('./pages/new-aptt/new-aptt.module').then(m => m.NewApttPageModule)
+  },
+  {
+    path: 'modal',
+    loadChildren: () => import('./pages/modal/modal.module').then(m => m.ModalPageModule)
   }
 ];
 

@@ -30,6 +30,8 @@ create-built-apk:
 
 build-apk: build copy sync create-built-apk
 
+build-apk-prod: build-prod copy sync create-built-apk
+
 run:
 	npm install
 	ng serve

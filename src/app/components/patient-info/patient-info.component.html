@@ -9,9 +9,21 @@
       <div class="value">{{ patient.weight }}</div>
       <div class="label">weight</div>
     </li>
-    <li *ngIf="patient.target_aptt && patient.target_aptt.low && patient.target_aptt.high">
-      <div class="value">{{ patient.target_aptt.low }} - {{patient.target_aptt.high}}</div>
-      <div class="label">target aptt</div>
-    </li>
+    <ng-container *ngIf="patient.drug_type === types.H">
+      <li *ngIf="patient.target_aptt && patient.target_aptt.low && patient.target_aptt.high">
+        <div class="value">{{ patient.target_aptt.low }} - {{patient.target_aptt.high}}</div>
+        <div class="label">target aptt</div>
+      </li>
+    </ng-container>
+    <ng-container *ngIf="patient.drug_type === types.I">
+      <li *ngIf="patient.tddi !== null && patient.tddi !== undefined">
+        <div class="value">{{ patient.tddi }}</div>
+        <div class="label">total daily dosage</div>
+      </li>
+      <li *ngIf="patient.target_glycemia !== null && patient.target_glycemia !== undefined">
+        <div class="value">{{ patient.target_glycemia }}</div>
+        <div class="label">target glycemia</div>
+      </li>
+    </ng-container>
   </ul>
 </div>

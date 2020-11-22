@@ -76,9 +76,9 @@
     </ng-container>
 
 
-    <div class="btn-center">
+    <div class="btn-center" *ngIf="patient.drug_type === types.H">
       <ion-button (click)="presentAlert()"
-                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
+                  color="primary"
                   [disabled]="isStopped">Stop the pump
       </ion-button>
     </div>

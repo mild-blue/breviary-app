@@ -19,4 +19,8 @@ export class HistoryEntriesComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  getDate(date: Date | undefined): string {
+    return date ? date.toISOString() : '';
+  }
 }

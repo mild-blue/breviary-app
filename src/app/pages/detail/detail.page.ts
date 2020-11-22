@@ -132,7 +132,8 @@ export class DetailPage implements OnInit {
     }
   }
 
-  public handleReminderDateChange(event: CustomEvent): void {
+  public handleReminderDateChange(e: Event): void {
+    const event = e as CustomEvent;
     const date = new Date(event.detail.value);
     if (date != this.nextReminderDate) {
       this.notificationService.setNextReminderDate(date);

@@ -30,8 +30,8 @@
     <div class="table-col">
       <ion-datetime display-format="DD.MM.YYYY hh:mm"
                     class="ion-no-padding"
-                    disabled
-                    [value]="e.date"></ion-datetime>
+                    [disabled]="true"
+                    [value]="getDate(e.date)"></ion-datetime>
     </div>
     <ng-container *ngIf="patient.drug_type === types.H">
       <div class="table-col">

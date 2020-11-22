@@ -1,4 +1,4 @@
 export enum HomeTab {
-  insulin,
-  heparin
+  insulin = 'insulin',
+  heparin = 'heparin'
 }

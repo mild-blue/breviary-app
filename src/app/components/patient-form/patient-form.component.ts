@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DrugType, Patient } from '@app/model/Patient';
+import { RangeValue } from '@ionic/core';
 
 interface IntervalRange {
   lower: number;
@@ -40,14 +41,15 @@ export class PatientFormComponent implements OnInit {
     return date.toISOString();
   }
 
-  public setPatientDate(event: CustomEvent): void {
+  public setPatientDate(e: Event): void {
+    const event = e as CustomEvent;
     if (!this.patient) {
       return;
     }
     this.patient.date_of_birth = new Date(event.detail.value);
   }
 
-  public getPatientRange(): IntervalRange | undefined {
+  public getPatientRange(): RangeValue {
     if (!this.patient?.target_aptt || !this.patient.target_aptt.low || !this.patient.target_aptt.high) {
       return { lower: 2, upper: 2.5 };
     }

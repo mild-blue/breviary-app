@@ -95,7 +95,9 @@ export class ApiService {
       `${environment.apiUrl}/patients/history-entries/${id}`
     ).pipe(
       map((r: Object) => {
-        return r as PatientHistoryEntry[];
+        const e = r as PatientHistoryEntry[];
+        e.forEach(entry => entry.date = new Date(entry.date));
+        return e;
       })
     );
   }

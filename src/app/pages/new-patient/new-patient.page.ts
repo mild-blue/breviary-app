@@ -29,7 +29,7 @@ export class NewPatientPage implements OnInit {
     this.apiService.addPatient(patient).subscribe(p => {
       if (p.id) {
         this.presentToast('Patient added successfully').then(() => {
-          this.router.navigate(['/detail', p.id]);
+          this.router.navigate(['/detail', p.id, p.drug_type]);
         });
       }
     });

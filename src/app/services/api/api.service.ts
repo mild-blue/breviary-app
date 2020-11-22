@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DrugType, HeparinRecommendation, Patient, PatientHistoryEntry, PatientSex } from '@app/model/Patient';
+import { DrugType, HeparinRecommendation, InsulinRecommendation, Patient, PatientHistoryEntry, PatientSex } from '@app/model/Patient';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
@@ -106,6 +106,17 @@ export class ApiService {
       {
         patient_id: id,
         current_aptt: aptt
+      }
+    ).pipe(first()).toPromise();
+  }
+
+  public getPatientInsulinRecommendation(id: number, tddi: number, glycemia: number): Promise<Object | InsulinRecommendation> {
+    return this.http.post(
+      `${environment.apiUrl}/recommendation/insulin`,
+      {
+        patient_id: id,
+        current_glycemia: glycemia,
+        expected_carbohydrate_intake: tddi
       }
     ).pipe(first()).toPromise();
   }

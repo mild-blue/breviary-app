@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DrugType, HeparinRecommendation, Patient } from '@app/model/Patient';
+import { DrugType, HeparinRecommendation, InsulinRecommendation, Patient } from '@app/model/Patient';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService } from '@app/services/notification/notification.service';
 import { ApiService } from '@app/services/api/api.service';
@@ -12,6 +12,7 @@ import { ApiService } from '@app/services/api/api.service';
 export class RecommendationPage implements OnInit {
   public patient?: Patient;
   public heparinRecommendation?: HeparinRecommendation;
+  public insulinRecommendation?: InsulinRecommendation;
   public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -31,8 +32,14 @@ export class RecommendationPage implements OnInit {
       this._initPatient(+id);
 
       const aptt = this.activatedRoute.snapshot.paramMap.get('aptt');
-      if (aptt) {
+      if (aptt && +aptt !== -1) {
         this.heparinRecommendation = await this.apiService.getPatientHeparinRecommendation(+id, +aptt) as HeparinRecommendation;
+      }
+
+      const tddi = this.activatedRoute.snapshot.paramMap.get('tddi');
+      const glycemia = this.activatedRoute.snapshot.paramMap.get('glycemia');
+      if (tddi && glycemia && +tddi !== -1 && +glycemia !== -1) {
+        this.insulinRecommendation = await this.apiService.getPatientInsulinRecommendation(+id, +tddi, +glycemia) as InsulinRecommendation;
       }
     }
   }
@@ -44,12 +51,23 @@ export class RecommendationPage implements OnInit {
   }
 
   get nothingToShow(): boolean {
-    if (!this.heparinRecommendation) {
-      return true;
+    if (this.patient?.drug_type === DrugType.H) {
+      if (!this.heparinRecommendation) {
+        return true;
+      }
+
+      return ((this.heparinRecommendation.actual_heparin_bolus_dosage !== undefined && this.heparinRecommendation.actual_heparin_bolus_dosage === this.heparinRecommendation.previous_heparin_bolus_dosage) || this.heparinRecommendation.actual_heparin_bolus_dosage === undefined) &&
+        ((this.heparinRecommendation.actual_heparin_continuous_dosage !== undefined && this.heparinRecommendation.actual_heparin_continuous_dosage === this.heparinRecommendation.previous_heparin_continuous_dosage) || this.heparinRecommendation.actual_heparin_continuous_dosage === undefined) &&
+        !this.heparinRecommendation.doctor_warning;
     }
-    return ((this.heparinRecommendation.actual_heparin_bolus_dosage !== undefined && this.heparinRecommendation.actual_heparin_bolus_dosage === this.heparinRecommendation.previous_heparin_bolus_dosage) || this.heparinRecommendation.actual_heparin_bolus_dosage === undefined) &&
-      ((this.heparinRecommendation.actual_heparin_continuous_dosage !== undefined && this.heparinRecommendation.actual_heparin_continuous_dosage === this.heparinRecommendation.previous_heparin_continuous_dosage) || this.heparinRecommendation.actual_heparin_continuous_dosage === undefined) &&
-      !this.heparinRecommendation.doctor_warning;
+
+    if (this.patient?.drug_type === DrugType.I) {
+      if (!this.insulinRecommendation) {
+        return true;
+      }
+    }
+
+    return true;
   }
 
   public accept(): void {

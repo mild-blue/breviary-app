@@ -30,13 +30,18 @@
     <app-history-entries [patient]="patient" [entries]="historyEntries"></app-history-entries>
 
     <div class="buttons">
-      <ion-button *ngIf="historyEntries.length > 0"
-                  expand="block" [routerLink]="['/new-aptt', patient.id]"
+      <ion-button *ngIf="historyEntries.length > 0 || patient.drug_type === types.I"
+                  expand="block"
+                  [routerLink]="['/new-aptt', patient.id]"
                   [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
-        Add new aPTT result
+        Add new
+        <ng-container *ngIf="patient.drug_type === types.H"> aPTT result</ng-container>
+        <ng-container *ngIf="patient.drug_type === types.I"> entry</ng-container>
       </ion-button>
-      <ion-button *ngIf="!historyEntries.length"
-                  expand="block" [routerLink]="['/new-aptt', patient.id, 'recommendation', 0]"
+
+      <ion-button *ngIf="!historyEntries.length && patient.drug_type === types.H"
+                  expand="block"
+                  [routerLink]="['/new-aptt', patient.id, 'recommendation', 0, -1, -1]"
                   [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
         Begin {{ drugType }} treatment
       </ion-button>
@@ -46,27 +51,30 @@
       </ion-button>
     </div>
 
-    <ion-item-group>
-      <ion-item-divider>
-        <ion-label>Next aPTT check:</ion-label>
-        <ion-label slot="end" class="timeout" *ngIf="timeLeft !== ''">{{ timeLeft }}</ion-label>
-      </ion-item-divider>
-    </ion-item-group>
-    <ion-list>
-      <ion-item class="ion-no-padding" [detail]="false" (click)="toggleReminder()">
-        <ion-label>Notification</ion-label>
-        <div class="no-events">
-          <ion-toggle [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
-                      [checked]="nextReminderDate !== undefined"></ion-toggle>
-        </div>
-      </ion-item>
-      <ion-item class="ion-no-padding" *ngIf="nextReminderDate !== undefined">
-        <ion-label>Date</ion-label>
-        <ion-datetime displayFormat="DD MMMM hh:mm a"
-                      (ionChange)="handleReminderDateChange($event)"
-                      [value]="nextReminderDate.toISOString()"></ion-datetime>
-      </ion-item>
-    </ion-list>
+    <ng-container *ngIf="patient.drug_type === types.H">
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Next aPTT check:</ion-label>
+          <ion-label slot="end" class="timeout" *ngIf="timeLeft !== ''">{{ timeLeft }}</ion-label>
+        </ion-item-divider>
+      </ion-item-group>
+      <ion-list>
+        <ion-item class="ion-no-padding" [detail]="false" (click)="toggleReminder()">
+          <ion-label>Notification</ion-label>
+          <div class="no-events">
+            <ion-toggle [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
+                        [checked]="nextReminderDate !== undefined"></ion-toggle>
+          </div>
+        </ion-item>
+        <ion-item class="ion-no-padding" *ngIf="nextReminderDate !== undefined">
+          <ion-label>Date</ion-label>
+          <ion-datetime displayFormat="DD MMMM hh:mm a"
+                        (ionChange)="handleReminderDateChange($event)"
+                        [value]="nextReminderDate.toISOString()"></ion-datetime>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
 
     <div class="btn-center">
       <ion-button (click)="presentAlert()"

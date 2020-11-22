@@ -63,6 +63,11 @@ export interface HeparinRecommendation {
   previous_heparin_continuous_dosage: number;
 }
 
+
+export interface InsulinRecommendation {
+  dosage: number;
+}
+
 export interface PatientHistoryEntry {
   date: Date;
   aptt: number;

@@ -11,25 +11,55 @@
 </ion-header>
 
 <ion-content>
-  <section>
+  <section *ngIf="patient">
     <app-patient-card [patient]="patient"></app-patient-card>
     <form (ngSubmit)="save()">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle>aPTT result</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-item class="ion-no-padding">
-            <ion-input [(ngModel)]="apttValue" name="apttValue" type="number"></ion-input>
-          </ion-item>
-        </ion-card-content>
-      </ion-card>
+
+      <ng-container *ngIf="patient.drug_type == types.H">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>aPTT result</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item class="ion-no-padding">
+              <ion-input [(ngModel)]="apttValue" name="apttValue" type="number"></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+
+      <ng-container *ngIf="patient.drug_type == types.I">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Total dose of insulin</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item class="ion-no-padding">
+              <ion-input [(ngModel)]="tddi" name="tddi" type="number"></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Target glycemia</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item class="ion-no-padding">
+              <ion-input [(ngModel)]="target_glycemia" name="target_glycemia" type="number"></ion-input>
+              <ion-note slot="end">mmol/l</ion-note>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+
 
       <ion-button type="submit"
-                  [color]="patient?.drug_type == types.H ? 'primary' : 'secondary'"
+                  *ngIf="patient"
+                  [color]="patient.drug_type == types.H ? 'primary' : 'secondary'"
                   expand="block"
                   class="floating-button"
-                  [disabled]="!apttValue">Add
+                  [disabled]="(patient.drug_type == types.H && !apttValue) || (patient.drug_type == types.I && !target_glycemia && !tddi)">
+        Add
       </ion-button>
 
     </form>

@@ -13,6 +13,8 @@ export class NewApttPage implements OnInit {
 
   public patient?: Patient;
   public apttValue?: number;
+  public tddi?: number;
+  public target_glycemia?: number;
   public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -35,11 +37,21 @@ export class NewApttPage implements OnInit {
   }
 
   public async save(): Promise<void> {
-    if (!this.apttValue || !this.patient) {
-      return;
+    if (this.patient?.drug_type === DrugType.H) {
+      if (!this.apttValue) {
+        return;
+      }
+
+      this.router.navigate(['/new-aptt/', this.patient.id, 'recommendation', this.apttValue, -1, -1]);
     }
 
-    this.router.navigate(['/new-aptt/', this.patient.id, 'recommendation', this.apttValue]);
+    if (this.patient?.drug_type === DrugType.I) {
+      if (!this.tddi || !this.target_glycemia) {
+        return;
+      }
+
+      this.router.navigate(['/new-aptt/', this.patient.id, 'recommendation', -1, this.tddi, this.target_glycemia]);
+    }
   }
 
   public cancel(): void {

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: NewApttPage
   },
   {
-    path: 'recommendation/:aptt',
+    path: 'recommendation/:aptt/:tddi/:glycemia',
     loadChildren: () => import('./recommendation/recommendation.module').then(m => m.RecommendationPageModule)
   }
 ];

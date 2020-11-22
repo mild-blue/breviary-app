@@ -18,3 +18,13 @@
 section {
   padding-bottom: 80px;
 }
+
+ion-item {
+  position: relative;
+
+  &.ios ion-note {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}

@@ -6,7 +6,11 @@
         Home
       </ion-button>
     </ion-buttons>
-    <ion-title>Patient detail</ion-title>
+    <ion-title>
+      <ng-container *ngIf="patient && patient.drug_type === types.H">Heparin</ng-container>
+      <ng-container *ngIf="patient && patient.drug_type === types.I">Insulin</ng-container>
+      patient detail
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 

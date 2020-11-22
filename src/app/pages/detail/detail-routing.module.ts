@@ -9,7 +9,7 @@ const routes: Routes = [
     component: DetailPage
   },
   {
-    path: 'more-info',
+    path: 'more-info/:type',
     loadChildren: () => import('./more-info/more-info.module').then(m => m.MoreInfoPageModule)
   },
   {

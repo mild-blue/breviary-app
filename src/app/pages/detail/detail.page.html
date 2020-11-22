@@ -22,7 +22,7 @@
         <ion-button size="small"
                     fill="outline"
                     [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
-                    [routerLink]="['more-info']">More patient information
+                    [routerLink]="['more-info', patient.drug_type]">More patient information
         </ion-button>
       </div>
     </div>

@@ -19,17 +19,19 @@ export class MoreInfoPage implements OnInit {
               private router: Router,
               private apiService: ApiService) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id) {
-      this._initPatient(+id);
+    const type = this.activatedRoute.snapshot.paramMap.get('type');
+    if (id && type) {
+      this._initPatient(+id, type);
     }
   }
 
   ngOnInit() {
   }
 
-  private _initPatient(id: number): void {
+  private _initPatient(id: number, type: string): void {
     this.apiService.getPatient(id).subscribe((p) => {
       this.patient = p;
+      this.patient.drug_type = type.toUpperCase() === DrugType.I ? DrugType.I : DrugType.H;
     });
   }
 

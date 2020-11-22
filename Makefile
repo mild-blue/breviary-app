@@ -25,7 +25,8 @@ create-built-apk:
 	cd android && \
 	./gradlew assembleDebug && \
 	cd ../ && \
-	echo "The APK is in the following file: android/app/build/outputs/apk/debug/app-debug.apk"
+	mv android/app/build/outputs/apk/debug/app-debug.apk mobile-application/android/breviary.apk && \
+	echo "The APK is in the following file: mobile-application/android/breviary.apk"
 
 build-apk: build copy sync create-built-apk
 

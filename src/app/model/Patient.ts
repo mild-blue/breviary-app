@@ -70,7 +70,10 @@ export interface InsulinRecommendation {
 
 export interface PatientHistoryEntry {
   date: Date;
-  aptt: number;
-  bolus: number;
-  heparin_continuous: number;
+  aptt?: number;
+  bolus?: number;
+  heparin_continuous?: number;
+  carbohydrate_intake?: number;
+  dosage?: number;
+  glycemia_value?: number;
 }

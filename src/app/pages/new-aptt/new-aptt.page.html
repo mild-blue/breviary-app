@@ -31,22 +31,22 @@
       <ng-container *ngIf="patient.drug_type == types.I">
         <ion-card>
           <ion-card-header>
-            <ion-card-subtitle>Total dose of insulin</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-item class="ion-no-padding">
-              <ion-input [(ngModel)]="tddi" name="tddi" type="number"></ion-input>
-            </ion-item>
-          </ion-card-content>
-        </ion-card>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-subtitle>Target glycemia</ion-card-subtitle>
+            <ion-card-subtitle>Current glycemia</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
             <ion-item class="ion-no-padding">
               <ion-input [(ngModel)]="target_glycemia" name="target_glycemia" type="number"></ion-input>
               <ion-note slot="end">mmol/l</ion-note>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Expected carbohydrate intake</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item class="ion-no-padding">
+              <ion-input [(ngModel)]="tddi" name="tddi" type="number"></ion-input>
             </ion-item>
           </ion-card-content>
         </ion-card>

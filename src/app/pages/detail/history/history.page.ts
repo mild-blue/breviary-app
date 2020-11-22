@@ -35,7 +35,7 @@ export class HistoryPage implements OnInit {
 
   private _getPatientHistory(id: number): void {
     this.apiService.getPatientHistory(id).subscribe((e => {
-      this.historyEntries = e.slice(2);
+      this.historyEntries = e;
     }));
   }
 

@@ -3,15 +3,28 @@
     <div class="table-col">
       Date
     </div>
-    <div class="table-col">
-      aPTT
-    </div>
-    <div class="table-col">
-      Bolus
-    </div>
-    <div class="table-col">
-      Pump speed
-    </div>
+    <ng-container *ngIf="patient.drug_type === types.H">
+      <div class="table-col">
+        aPTT
+      </div>
+      <div class="table-col">
+        Bolus
+      </div>
+      <div class="table-col">
+        Pump speed
+      </div>
+    </ng-container>
+    <ng-container *ngIf="patient.drug_type === types.I">
+      <div class="table-col">
+        Carbs
+      </div>
+      <div class="table-col">
+        Glycemia
+      </div>
+      <div class="table-col">
+        Dosage
+      </div>
+    </ng-container>
   </div>
   <div class="table-row" *ngFor="let e of entries">
     <div class="table-col">
@@ -20,15 +33,28 @@
                     disabled
                     [value]="e.date"></ion-datetime>
     </div>
-    <div class="table-col">
-      {{e.aptt}}
-    </div>
-    <div class="table-col">
-      {{e.bolus}}
-    </div>
-    <div class="table-col">
-      {{e.heparin_continuous.toFixed(1)}}
-    </div>
+    <ng-container *ngIf="patient.drug_type === types.H">
+      <div class="table-col">
+        {{e.aptt}}
+      </div>
+      <div class="table-col">
+        {{e.bolus}}
+      </div>
+      <div class="table-col">
+        {{e.heparin_continuous !== undefined && e.heparin_continuous !== null ? e.heparin_continuous.toFixed(1) : ''}}
+      </div>
+    </ng-container>
+    <ng-container *ngIf="patient.drug_type === types.I">
+      <div class="table-col">
+        {{ e.carbohydrate_intake !== undefined && e.carbohydrate_intake !== null ? e.carbohydrate_intake.toFixed(1) : '' }}
+      </div>
+      <div class="table-col">
+        {{ e.glycemia_value !== undefined && e.glycemia_value !== null ? e.glycemia_value.toFixed(1) : '' }}
+      </div>
+      <div class="table-col">
+        {{e.dosage !== undefined && e.dosage !== null ? e.dosage.toFixed(1) : ''}}
+      </div>
+    </ng-container>
   </div>
 </div>
 

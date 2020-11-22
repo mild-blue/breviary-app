@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Patient, PatientHistoryEntry } from '@app/model/Patient';
+import { DrugType, Patient, PatientHistoryEntry } from '@app/model/Patient';
 
 @Component({
   selector: 'app-history-entries',
@@ -10,6 +10,8 @@ export class HistoryEntriesComponent implements OnInit {
 
   @Input() patient?: Patient;
   @Input() entries: PatientHistoryEntry[] = [];
+
+  public types: typeof DrugType = DrugType;
 
   constructor() {
   }

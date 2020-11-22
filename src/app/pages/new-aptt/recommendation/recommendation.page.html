@@ -13,7 +13,7 @@
                 <ion-card-header>
                     <ion-card-subtitle>Recommended dosage of insulin</ion-card-subtitle>
                     <ion-card-title class="ion-text-center">
-                        {{ insulinRecommendation.dosage }}
+                        {{ insulinRecommendation.dosage !== undefined && insulinRecommendation.dosage !== null ? insulinRecommendation.dosage.toFixed(1) : '' }}
                     </ion-card-title>
                 </ion-card-header>
             </ion-card>

@@ -1,0 +1,22 @@
+svg {
+
+  height: 100%;
+
+  path {
+    stroke: var(--ion-color-secondary);
+
+    &.primary {
+      stroke: var(--ion-color-primary);
+    }
+  }
+}
+
+.graph {
+  position: relative;
+  transform: rotate(180deg);
+
+  padding: 30px 16px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+}

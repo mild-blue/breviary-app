@@ -6,6 +6,7 @@ import { PatientFormComponent } from '../components/patient-form/patient-form.co
 import { FormsModule } from '@angular/forms';
 import { PatientInfoComponent } from '../components/patient-info/patient-info.component';
 import { HistoryEntriesComponent } from '../components/history-entries/history-entries.component';
+import { GraphComponent } from '../components/graph/graph.component';
 
 // import { RouterModule } from '@angular/router';
 
@@ -14,7 +15,8 @@ import { HistoryEntriesComponent } from '../components/history-entries/history-e
     PatientCardComponent,
     PatientFormComponent,
     PatientInfoComponent,
-    HistoryEntriesComponent
+    HistoryEntriesComponent,
+    GraphComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { HistoryEntriesComponent } from '../components/history-entries/history-e
     PatientCardComponent,
     PatientFormComponent,
     PatientInfoComponent,
-    HistoryEntriesComponent
+    HistoryEntriesComponent,
+    GraphComponent
   ]
 })
 export class PagesSharedModule {

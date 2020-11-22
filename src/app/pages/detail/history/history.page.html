@@ -10,6 +10,11 @@
 <ion-content>
   <app-patient-card [patient]="patient"></app-patient-card>
   <main>
+    <h2 *ngIf="patient?.drug_type === types.H">aPTT statistics</h2>
+    <h2 *ngIf="patient?.drug_type === types.I">Glycemia statistics</h2>
+    <ng-container *ngIf="patient && historyEntries.length">
+      <app-graph [items]="getGraphData()" [color]="patient.drug_type === types.H ? 'primary' : 'secondary'"></app-graph>
+    </ng-container>
     <h2>History</h2>
     <app-history-entries [patient]="patient" [entries]="historyEntries"></app-history-entries>
   </main>

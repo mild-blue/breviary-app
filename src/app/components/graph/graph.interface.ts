@@ -1,4 +1,4 @@
 export interface GraphItemInterface {
-  date: Date;
+  label: string;
   value: number;
 }

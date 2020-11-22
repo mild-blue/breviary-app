@@ -33,6 +33,7 @@ export class ScanQrPage implements OnInit {
         if (this.qrContent) {
           this.apiService.findPatientByQR().subscribe(
             (p) => {
+              // todo: save drug_type
               p.drug_type = this.type;
               this.presentSuccessAlert('Patient retrieved from IKEM database.', p.id);
             },

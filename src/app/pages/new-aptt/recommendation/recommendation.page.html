@@ -5,10 +5,10 @@
 </ion-header>
 
 <ion-content>
-    <section *ngIf="patient && r">
+    <section *ngIf="patient && heparinRecommendation">
         <app-patient-card [patient]="patient"></app-patient-card>
 
-        <ion-card *ngIf="r.doctor_warning" class="warning">
+        <ion-card *ngIf="heparinRecommendation.doctor_warning" class="warning">
             <ion-card-header>
                 <ion-card-subtitle>
                     <ion-icon name="warning"></ion-icon>
@@ -16,35 +16,35 @@
                 </ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
-                <p>{{ r.doctor_warning}}</p>
+                <p>{{ heparinRecommendation.doctor_warning}}</p>
                 <strong>You should contact the doctor before making any changes.</strong>
             </ion-card-content>
         </ion-card>
 
-    <ion-card *ngIf="r.actual_heparin_bolus_dosage && r.previous_heparin_bolus_dosage !== r.actual_heparin_bolus_dosage">
-      <ion-card-header>
-        <ion-card-subtitle>Apply bolus</ion-card-subtitle>
-        <ion-card-title class="ion-text-center">{{ r.actual_heparin_bolus_dosage }}
-          <ion-note>ml</ion-note>
-        </ion-card-title>
-      </ion-card-header>
-    </ion-card>
+        <ion-card *ngIf="heparinRecommendation.actual_heparin_bolus_dosage && heparinRecommendation.previous_heparin_bolus_dosage !== heparinRecommendation.actual_heparin_bolus_dosage">
+            <ion-card-header>
+                <ion-card-subtitle>Apply bolus</ion-card-subtitle>
+                <ion-card-title class="ion-text-center">{{ heparinRecommendation.actual_heparin_bolus_dosage }}
+                    <ion-note>ml</ion-note>
+                </ion-card-title>
+            </ion-card-header>
+        </ion-card>
 
-        <ion-card *ngIf="r.actual_heparin_continuous_dosage !== undefined && r.previous_heparin_continuous_dosage !== undefined &&
-r.actual_heparin_continuous_dosage !== r.previous_heparin_continuous_dosage">
+        <ion-card *ngIf="heparinRecommendation.actual_heparin_continuous_dosage !== undefined && heparinRecommendation.previous_heparin_continuous_dosage !== undefined &&
+heparinRecommendation.actual_heparin_continuous_dosage !== heparinRecommendation.previous_heparin_continuous_dosage">
             <ion-card-header>
                 <ion-card-subtitle>Change pump speed</ion-card-subtitle>
             </ion-card-header>
             <ion-card-content>
                 <div class="speed">
                     <div class="speed-item">
-                        <div class="value">{{ r.previous_heparin_continuous_dosage !== null ? r.previous_heparin_continuous_dosage.toFixed(1) : '-'}}</div>
+                        <div class="value">{{ heparinRecommendation.previous_heparin_continuous_dosage !== null ? heparinRecommendation.previous_heparin_continuous_dosage.toFixed(1) : '-'}}</div>
                         <div class="units">ml/hod</div>
                         <div class="label">Current</div>
                     </div>
                     <ion-icon name="arrow-forward"></ion-icon>
                     <div class="speed-item">
-                        <div class="value">{{r.actual_heparin_continuous_dosage.toFixed(1)}}</div>
+                        <div class="value">{{heparinRecommendation.actual_heparin_continuous_dosage.toFixed(1)}}</div>
                         <div class="units">ml/hod</div>
                         <div class="label">Recommended</div>
                     </div>

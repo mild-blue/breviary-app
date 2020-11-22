@@ -48,6 +48,10 @@ export class DetailPage implements OnInit {
     }
   }
 
+  get drugType(): string {
+    return this.patient?.drug_type === DrugType.I ? 'insulin' : 'heparin';
+  }
+
   get nextReminderDate(): Date | undefined {
     return this.notificationService.getNextReminderDate();
   }

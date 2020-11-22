@@ -11,27 +11,30 @@ import { ApiService } from '@app/services/api/api.service';
 })
 export class RecommendationPage implements OnInit {
   public patient?: Patient;
-  public r?: HeparinRecommendation;
+  public heparinRecommendation?: HeparinRecommendation;
   public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private nfService: NotificationService,
               private apiService: ApiService) {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (id) {
-      this._initPatient(+id);
-    }
+
   }
 
   ngOnInit() {
-    this.activatedRoute.queryParamMap.subscribe((params) => {
-        const r = params.get('recommendation');
-        if (r) {
-          this.r = JSON.parse(r);
-        }
+    this._initData();
+  }
+
+  private async _initData(): Promise<void> {
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    if (id) {
+      this._initPatient(+id);
+
+      const aptt = this.activatedRoute.snapshot.paramMap.get('aptt');
+      if (aptt) {
+        this.heparinRecommendation = await this.apiService.getPatientHeparinRecommendation(+id, +aptt) as HeparinRecommendation;
       }
-    );
+    }
   }
 
   private _initPatient(id: number): void {
@@ -41,17 +44,17 @@ export class RecommendationPage implements OnInit {
   }
 
   get nothingToShow(): boolean {
-    if (!this.r) {
+    if (!this.heparinRecommendation) {
       return true;
     }
-    return ((this.r.actual_heparin_bolus_dosage !== undefined && this.r.actual_heparin_bolus_dosage === this.r.previous_heparin_bolus_dosage) || this.r.actual_heparin_bolus_dosage === undefined) &&
-      ((this.r.actual_heparin_continuous_dosage !== undefined && this.r.actual_heparin_continuous_dosage === this.r.previous_heparin_continuous_dosage) || this.r.actual_heparin_continuous_dosage === undefined) &&
-      !this.r.doctor_warning;
+    return ((this.heparinRecommendation.actual_heparin_bolus_dosage !== undefined && this.heparinRecommendation.actual_heparin_bolus_dosage === this.heparinRecommendation.previous_heparin_bolus_dosage) || this.heparinRecommendation.actual_heparin_bolus_dosage === undefined) &&
+      ((this.heparinRecommendation.actual_heparin_continuous_dosage !== undefined && this.heparinRecommendation.actual_heparin_continuous_dosage === this.heparinRecommendation.previous_heparin_continuous_dosage) || this.heparinRecommendation.actual_heparin_continuous_dosage === undefined) &&
+      !this.heparinRecommendation.doctor_warning;
   }
 
   public accept(): void {
-    if (this.r?.next_remainder) {
-      const date = new Date(this.r.next_remainder);
+    if (this.heparinRecommendation?.next_remainder) {
+      const date = new Date(this.heparinRecommendation.next_remainder);
       date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
       this.nfService.setNextReminderDate(date);
     }

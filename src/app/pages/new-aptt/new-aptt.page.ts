@@ -39,12 +39,7 @@ export class NewApttPage implements OnInit {
       return;
     }
 
-    const recommendation = await this.apiService.getPatientHeparinRecommendation(this.patient.id, this.apttValue);
-    this.router.navigate(['/new-aptt/', this.patient?.id ?? 0, 'recommendation'], {
-      queryParams: {
-        recommendation: JSON.stringify(recommendation)
-      }
-    });
+    this.router.navigate(['/new-aptt/', this.patient.id, 'recommendation', this.apttValue]);
   }
 
   public cancel(): void {

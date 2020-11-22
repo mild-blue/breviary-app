@@ -30,10 +30,18 @@
     <app-history-entries [patient]="patient" [entries]="historyEntries"></app-history-entries>
 
     <div class="buttons">
-      <ion-button expand="block" [routerLink]="['/new-aptt', patient.id]"
-                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">Add new aPTT result
+      <ion-button *ngIf="historyEntries.length > 0"
+                  expand="block" [routerLink]="['/new-aptt', patient.id]"
+                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
+        Add new aPTT result
+      </ion-button>
+      <ion-button *ngIf="!historyEntries.length"
+                  expand="block" [routerLink]="['/new-aptt', patient.id, 'recommendation', 0]"
+                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
+        Begin {{ drugType }} treatment
       </ion-button>
       <ion-button fill="clear" size="small" [routerLink]="['history']"
+                  *ngIf="historyEntries.length"
                   [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">show complete history
       </ion-button>
     </div>

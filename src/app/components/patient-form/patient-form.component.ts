@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Patient } from '@app/model/Patient';
+import { DrugType, Patient } from '@app/model/Patient';
 
 interface IntervalRange {
   lower: number;
@@ -15,6 +15,8 @@ export class PatientFormComponent implements OnInit {
 
   @Input() patient?: Patient;
   @Output() formSubmitted: EventEmitter<Patient> = new EventEmitter<Patient>();
+
+  public types: typeof DrugType = DrugType;
 
   constructor() {
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '@app/services/api/api.service';
-import { Patient, PatientHistoryEntry } from '@app/model/Patient';
+import { DrugType, Patient, PatientHistoryEntry } from '@app/model/Patient';
 import { NotificationService } from '@app/services/notification/notification.service';
 import { AlertController, IonDatetime } from '@ionic/angular';
 
@@ -26,6 +26,7 @@ export class DetailPage implements OnInit {
   public timeLeft: string = '';
   public reminderOn?: boolean;
   public isStopped: boolean = false;
+  public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService,

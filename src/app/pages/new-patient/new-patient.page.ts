@@ -12,14 +12,14 @@ import { ToastController } from '@ionic/angular';
 export class NewPatientPage implements OnInit {
 
   public patient: Patient = new Patient();
-  public type: DrugType = DrugType.H;
+  public types: typeof DrugType = DrugType;
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService,
               private toastController: ToastController,
               private router: Router) {
     const type = this.activatedRoute.snapshot.paramMap.get('type');
-    this.type = type && type.toUpperCase() === DrugType.I.valueOf() ? DrugType.I : DrugType.H;
+    this.patient.drug_type = type && type.toUpperCase() === DrugType.I.valueOf() ? DrugType.I : DrugType.H;
   }
 
   ngOnInit() {

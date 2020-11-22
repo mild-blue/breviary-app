@@ -1,15 +1,24 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
+  <ion-toolbar [color]="patient.drug_type === types.H ? 'primary' : 'secondary'">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-title>New patient</ion-title>
+    <ion-title>
+      New
+      <ng-container *ngIf="patient && patient.drug_type === types.H"> heparin</ng-container>
+      <ng-container *ngIf="patient && patient.drug_type === types.I"> insulin</ng-container>
+      patient
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <main>
-    <ion-button fill="outline" expand="block" routerLink="/scan-qr" routerDirection="forward">Scan QR code</ion-button>
+    <ion-button fill="outline" expand="block"
+                [color]="patient.drug_type === types.H ? 'primary' : 'secondary'"
+                routerLink="/scan-qr"
+                routerDirection="forward">Scan QR code
+    </ion-button>
 
     <app-patient-form [patient]="patient" (formSubmitted)="save($event)"></app-patient-form>
   </main>

@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
+  <ion-toolbar [color]="activeTab == tabs.heparin ? 'primary' : 'secondary'">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -9,7 +9,7 @@
 
 <ion-content>
 
-  <ion-segment [(ngModel)]="activeTab">
+  <ion-segment [(ngModel)]="activeTab" [class.insulin]="activeTab == tabs.insulin">
     <ion-segment-button [value]="tabs.heparin">
       <ion-label>Heparin</ion-label>
     </ion-segment-button>
@@ -31,7 +31,7 @@
       </ion-list>
       <p *ngIf="!hPatients.length">Continue by adding new patient</p>
 
-      <ion-fab-button color="primary" routerLink="/new/h" routerDirection="forward">
+      <ion-fab-button color="primary" routerLink="/new/heparin" routerDirection="forward">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
     </ng-container>
@@ -48,7 +48,7 @@
       </ion-list>
       <p *ngIf="!iPatients.length">Continue by adding new patient</p>
 
-      <ion-fab-button color="secondary" routerLink="/new/i" routerDirection="forward">
+      <ion-fab-button color="secondary" routerLink="/new/insulin" routerDirection="forward">
         <ion-icon name="add-outline"></ion-icon>
       </ion-fab-button>
     </ng-container>

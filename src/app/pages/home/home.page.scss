@@ -18,10 +18,20 @@ ion-segment {
         color: var(--ion-color-primary);
       }
     }
+
+    &.insulin ion-segment-button {
+      &.segment-button-checked {
+        color: var(--ion-color-secondary);
+      }
+    }
   }
 
   &.md {
     background-color: var(--ion-color-primary);
+
+    &.insulin {
+      background-color: var(--ion-color-secondary);
+    }
 
     ion-segment-button {
       --color: rgba(var(--ion-color-primary-contrast-rgb), 0.5);

@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
+  <ion-toolbar [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
     <ion-buttons slot="start">
       <ion-button routerLink="/home" routerDirection="back">
         <ion-icon name="chevron-back-outline"></ion-icon>

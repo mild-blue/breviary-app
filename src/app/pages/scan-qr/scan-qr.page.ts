@@ -27,6 +27,7 @@ export class ScanQrPage implements OnInit {
         if (this.qrContent) {
           this.apiService.findPatientByQR().subscribe(
             (p) => {
+              // todo set patinet drug_type from homepage !!!!!
               this.presentSuccessAlert('Patient retrieved from IKEM database.', p.id);
             },
             () => this.presentAlert('No patient found in database.'));

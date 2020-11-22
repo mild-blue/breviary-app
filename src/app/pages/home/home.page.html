@@ -7,10 +7,10 @@
 <ion-content>
 
   <ion-segment [(ngModel)]="activeTab" [class.insulin]="activeTab == tabs.insulin">
-    <ion-segment-button [value]="tabs.heparin">
+    <ion-segment-button [value]="tabs.heparin.valueOf()">
       <ion-label>Heparin</ion-label>
     </ion-segment-button>
-    <ion-segment-button [value]="tabs.insulin">
+    <ion-segment-button [value]="tabs.insulin.valueOf()">
       <ion-label>Insulin</ion-label>
     </ion-segment-button>
   </ion-segment>

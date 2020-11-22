@@ -54,7 +54,9 @@ export class PatientFormComponent implements OnInit {
     return { lower: this.patient.target_aptt.low, upper: this.patient.target_aptt.high };
   }
 
-  public setPatientRange(event: CustomEvent): void {
+  public setPatientRange(e: Event): void {
+    const event = e as CustomEvent;
+
     if (!this.patient) {
       return;
     }

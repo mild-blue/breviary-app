@@ -67,7 +67,7 @@ export class RecommendationPage implements OnInit {
       }
     }
 
-    return true;
+    return false;
   }
 
   public accept(): void {

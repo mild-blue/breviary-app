@@ -9,7 +9,7 @@
         <app-patient-card [patient]="patient"></app-patient-card>
 
         <ng-container *ngIf="patient.drug_type == types.I && insulinRecommendation">
-            <ion-card *ngIf="insulinRecommendation.dosage">
+            <ion-card *ngIf="insulinRecommendation.dosage !== null && insulinRecommendation.dosage !== undefined">
                 <ion-card-header>
                     <ion-card-subtitle>Recommended dosage of insulin</ion-card-subtitle>
                     <ion-card-title class="ion-text-center">

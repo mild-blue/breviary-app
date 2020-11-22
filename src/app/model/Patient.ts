@@ -18,24 +18,8 @@ export class Patient {
 
   constructor() {
     this.id = 0;
-    // this.first_name = '';
-    // this.last_name = '';
-    // this.date_of_birth = new Date('1950/01/01');
-    // this.height = 175;
-    // this.weight = 85;
-    // this.sex = PatientSex.M;
-    // this.drug_type = DrugType.H;
-    // this.target_aptt = {
-    //   low: 2,
-    //   high: 2.5
-    // };
-    // this.actual_aptt = 0;
-    // this.previous_aptt = 0;
-    // this.actual_aptt_updated_on = new Date();
-    // this.actual_dosage = 0;
-    // this.previous_dosage = 0;
-    // this.tddi = 50;
-    // this.target_glycemia = 0;
+    this.tddi = 50;
+    this.target_glycemia = 6;
   }
 }
 

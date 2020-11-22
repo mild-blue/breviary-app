@@ -26,8 +26,6 @@ export class PatientFormComponent implements OnInit {
   }
 
   public save(): void {
-    // if(!this.patient || !this.patient.first_name || !this.patient.last_name || !this.patient.date_of_birth ||
-    // !this.patient.height || !this.patient.weight || !this.patient)
     this.formSubmitted.emit(this.patient);
   }
 

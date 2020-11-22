@@ -27,7 +27,6 @@ export class NewPatientPage implements OnInit {
 
   public save(patient: Patient): void {
     this.apiService.addPatient(patient).subscribe(p => {
-      console.log('P from BE', p);
       if (p.id) {
         this.presentToast('Patient added successfully').then(() => {
           this.router.navigate(['/detail', p.id]);

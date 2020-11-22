@@ -1,6 +1,9 @@
 <div class="graph">
-  <svg [attr.viewBox]="'0 0 ' + sizeY + ' ' + sizeX">
-    <path [attr.d]="path" [attr.stroke-width]="1.5" stroke-linecap="round" fill="transparent"
+  <!--  <div>-->
+  <svg [attr.viewBox]="'0 0 ' + sizeX + ' ' + sizeY" #svg>
+    <path [attr.d]="path" stroke-linecap="round" fill="transparent"
+          [attr.stroke-width]="stroke"
           [class]="color"></path>
   </svg>
+  <!--  </div>-->
 </div>

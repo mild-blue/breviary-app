@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { GraphItemInterface } from '@app/components/graph/graph.interface';
 
 @Component({
@@ -6,14 +6,18 @@ import { GraphItemInterface } from '@app/components/graph/graph.interface';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss']
 })
-export class GraphComponent implements OnInit {
+export class GraphComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('svg') svg?: ElementRef;
   @Input() items: GraphItemInterface[] = [];
   @Input() color: string = 'primary';
   public path: string = '';
 
   public sizeX: number = 100;
   public sizeY: number = 100;
+  public stroke: number = 2;
+  public w: number = 0;
+  public h: number = 0;
 
   constructor() {
   }
@@ -32,7 +36,22 @@ export class GraphComponent implements OnInit {
     console.log(this.path);
 
     this.sizeY = Math.max(...this.items.map(i => i.value));
-    this.sizeY = this.items.length;
+    const dates = this.items.map(i => i.label);
+    this.sizeX = Array.from(new Set(dates)).length - 1;
+    this.stroke = Math.min(this.sizeY, this.sizeX) / 10;
+
+
+  }
+
+  ngAfterViewInit() {
+    if (this.svg && this.svg.nativeElement) {
+      const
+        bbox = this.svg.nativeElement.getBBox();
+      this.w = bbox.x + bbox.width + bbox.x;
+      this.h = bbox.y + bbox.height + bbox.y;
+      console.log(bbox);
+    }
+
   }
 
 }

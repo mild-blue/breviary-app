@@ -38,7 +38,7 @@ export class MoreInfoPage implements OnInit {
   public save(patient: Patient): void {
     this.apiService.savePatient(patient).subscribe(p => {
       this.presentToast('Patient saved successfully').then(() => {
-        this.router.navigate(['/detail', p.id]);
+        this.router.navigate(['/detail', p.id, p.drug_type]);
       });
     });
   }

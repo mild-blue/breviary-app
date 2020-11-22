@@ -65,7 +65,7 @@ heparinRecommendation.actual_heparin_continuous_dosage !== heparinRecommendation
             </ion-card>
         </ng-container>
 
-        <ion-card *ngIf="nothingToShow" class="nothing">
+        <ion-card *ngIf="patient && (insulinRecommendation || heparinRecommendation) ? nothingToShow : false" class="nothing">
             <ion-card-header>
                 <ion-card-title>
                     All set!

@@ -78,7 +78,7 @@ export class RecommendationPage implements OnInit {
     }
 
     if (this.patient) {
-      this.router.navigate(['/detail', this.patient.id]);
+      this.router.navigate(['/detail', this.patient.id, this.patient.drug_type]);
     } else {
       this.router.navigate(['/home']);
     }

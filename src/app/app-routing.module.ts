@@ -20,7 +20,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/scan-qr/scan-qr.module').then(m => m.ScanQrPageModule)
   },
   {
-    path: 'detail/:id',
+    path: 'detail/:id/:type',
     loadChildren: () => import('./pages/detail/detail.module').then(m => m.DetailPageModule)
   },
   {

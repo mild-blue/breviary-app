@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar [color]="patient?.drug_type == types.H ? 'primary' : 'secondary'">
     <ion-buttons slot="start" *ngIf="patient">
-      <ion-button [routerLink]="['/detail', patient.id]" routerDirection="back">
+      <ion-button [routerLink]="['/detail', patient.id, patient.drug_type]" routerDirection="back">
         <ion-icon name="chevron-back-outline"></ion-icon>
         Patient
       </ion-button>

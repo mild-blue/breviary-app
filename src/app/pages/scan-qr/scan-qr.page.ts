@@ -50,7 +50,7 @@ export class ScanQrPage implements OnInit {
         {
           text: 'OK',
           handler: () => {
-            this.router.navigate(['/detail', id, 'more-info', this.type]);
+            this.router.navigate(['/detail', id, this.type, 'more-info']);
           }
         }
       ]

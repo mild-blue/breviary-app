@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
+  <ion-toolbar [color]="color">
     <ion-buttons slot="start">
       <ion-button routerLink="/home" routerDirection="back">
         <ion-icon name="chevron-back-outline"></ion-icon>
@@ -25,8 +25,8 @@
       <div class="btn-center no-margin">
         <ion-button size="small"
                     fill="outline"
-                    [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
-                    [routerLink]="['more-info', patient.drug_type]">More patient information
+                    [color]="color"
+                    [routerLink]="['more-info']">More patient information
         </ion-button>
       </div>
     </div>
@@ -37,7 +37,7 @@
       <ion-button *ngIf="historyEntries.length > 0 || patient.drug_type === types.I"
                   expand="block"
                   [routerLink]="['/new-aptt', patient.id]"
-                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
+                  [color]="color">
         Add new
         <ng-container *ngIf="patient.drug_type === types.H"> aPTT result</ng-container>
         <ng-container *ngIf="patient.drug_type === types.I"> entry</ng-container>
@@ -46,12 +46,12 @@
       <ion-button *ngIf="!historyEntries.length && patient.drug_type === types.H"
                   expand="block"
                   [routerLink]="['/new-aptt', patient.id, 'recommendation', 0, -1, -1]"
-                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">
+                  [color]="color">
         Begin {{ drugType }} treatment
       </ion-button>
       <ion-button fill="clear" size="small" [routerLink]="['history']"
                   *ngIf="historyEntries.length"
-                  [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'">show complete history
+                  [color]="color">show complete history
       </ion-button>
     </div>
 
@@ -66,7 +66,7 @@
         <ion-item class="ion-no-padding" [detail]="false" (click)="toggleReminder()">
           <ion-label>Notification</ion-label>
           <div class="no-events">
-            <ion-toggle [color]="patient?.drug_type === types.H ? 'primary' : 'secondary'"
+            <ion-toggle [color]="color"
                         [checked]="nextReminderDate !== undefined"></ion-toggle>
           </div>
         </ion-item>

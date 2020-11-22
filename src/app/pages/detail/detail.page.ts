@@ -26,12 +26,16 @@ export class DetailPage implements OnInit {
   public timeLeft: string = '';
   public reminderOn?: boolean;
   public isStopped: boolean = false;
+  public type: DrugType = DrugType.H;
   public types: typeof DrugType = DrugType;
+  public color: string = 'primary';
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService: ApiService,
               private alertController: AlertController,
               private notificationService: NotificationService) {
+    const type = this.activatedRoute.snapshot.paramMap.get('type');
+    this.color = type && type.toUpperCase() === DrugType.I ? 'secondary' : 'primary';
   }
 
   ngOnInit() {

@@ -6,7 +6,8 @@
         Patient
       </ion-button>
     </ion-buttons>
-    <ion-title>New aPTT result</ion-title>
+    <ion-title *ngIf="patient?.drug_type == types.H">New aPTT result</ion-title>
+    <ion-title *ngIf="patient?.drug_type == types.I">New data entry</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -47,6 +48,7 @@
           <ion-card-content>
             <ion-item class="ion-no-padding">
               <ion-input [(ngModel)]="tddi" name="tddi" type="number"></ion-input>
+              <ion-note slot="end">g</ion-note>
             </ion-item>
           </ion-card-content>
         </ion-card>
